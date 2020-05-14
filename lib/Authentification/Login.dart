@@ -20,11 +20,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 
   final formKey = GlobalKey<FormState>();
-  String email;
+  String username;
   String password;
-
   bool wrongInfo =false;
   bool good_internet= true;
+
   Widget Alert(){
     if(!good_internet){
       return Text("no internet connexion ",style: TextStyle(
@@ -46,9 +46,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     var height = MediaQuery
         .of(context)
         .size
@@ -85,18 +82,18 @@ class _LoginState extends State<Login> {
                     children: <Widget>[
                       TextFormField(
                         onSaved: (input) {
-                          email = input;
+                          username = input;
                         },
                         validator: (input) {
-                          if (EmailValidator.validate(input)) {} else {
-                            return "make sure the email is correct ";
+                          if((username==null)||(username.isEmpty)) {
+                            return "Please Enter a username ";
                           }
                         },
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(25.0),
                             ),
-                            labelText: "Email",
+                            labelText: "username",
                             prefixIcon: Icon(Icons.contacts,
                                 color: Colors.deepPurple)
                         ),
@@ -106,7 +103,7 @@ class _LoginState extends State<Login> {
                           password = input;
                         },
                         validator: (input) {
-                          if (input.length > 4) {} else {
+                          if (input.length > 8 || input.isNotEmpty) {} else {
                             return "there is a problem in the password ";
                           }
                         },
@@ -139,18 +136,41 @@ class _LoginState extends State<Login> {
                             onPressed: submit
                         ),
                       ),SizedBox(height: 30,),
-                      InkWell(
-                        onTap: () {
-                          // forget password
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () {
+                                // Sign up
+                                Navigator.pushReplacementNamed(
+                                    context, '/Login');
+                              },
+                              child: Text(
+                                "create account",
+                                style: TextStyle(
+                                    color: Colors.deepPurple,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),SizedBox(width: width/10,),
+                            InkWell(
+                              onTap: () {
+                                // forget password
 
-                        },
-                        child: Text(
-                          "Forgot password",
-                          style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline),
+
+                              },
+                              child: Text(
+                                "Forgot password",
+                                style: TextStyle(
+                                    color: Colors.deepPurple,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -165,14 +185,14 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Future<http.Response> submitInfo(String mail, String password) async {
+  Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
       'http://192.168.1.10:8000/login/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'username': mail,
+        'username': username,
         'password':password
       }),
     );
@@ -185,7 +205,7 @@ class _LoginState extends State<Login> {
       'http://192.168.1.10:8000/is_admin/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':'token f87e1ac35d466e9426cd16a5d3053f49417827ed'
+        'Authorization':'token $token'
       }
     );
   }
@@ -199,8 +219,8 @@ class _LoginState extends State<Login> {
           print('connected');
           good_internet=true;
           print("password : " + this.password);
-          print("email : " + this.email);
-          submitInfo(this.email, this.password).then((onValue){
+          print("username : " + this.username);
+          submitInfo(this.username, this.password).then((onValue){
             if (json.decode(onValue.body)["token"] != null){
               print("token "+json.decode(onValue.body)["token"].toString());
               is_admin(json.decode(onValue.body)["token"]).then((onValue){

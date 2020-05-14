@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
+import 'package:purifiercompanyapp/Animations/animation.dart';
+import 'package:purifiercompanyapp/Authentification/verify_info.dart';
+
 
 // to test if it is an email
 import 'package:email_validator/email_validator.dart';
@@ -27,7 +33,8 @@ class _SignUpState extends State<SignUp> {
   String password;
   String password2;
   String userName;
-  String phoneNumber;
+  String invitationcode;
+
 
   bool wrongInfo =false;
   bool good_internet= true;
@@ -94,6 +101,51 @@ class _SignUpState extends State<SignUp> {
                       fontFamily: "Poppins",
                     ),
                   ),SizedBox(height: 20),
+                new TextFormField(
+                decoration: new InputDecoration(
+                labelText: "Enter User Name",
+            fillColor: Colors.white,
+                border: new OutlineInputBorder(
+                borderRadius: new BorderRadius.circular(25.0),
+          ),
+            prefixIcon: Icon(Icons.contacts,color: Colors.deepPurple)
+        ),
+        // ignore: missing_return
+        validator: (username) {
+          if((username==null)||(username.isEmpty)) {
+            return "Please Enter a username ";
+          }
+        },
+        onSaved: (username){
+          this.userName=username;
+        },
+        keyboardType: TextInputType.text,
+        style: new TextStyle(
+          fontFamily: "Poppins",
+        ),
+      ),SizedBox(height: 20),new TextFormField(
+                    decoration: new InputDecoration(
+                        labelText: "Enter User invitation code ",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                        ),
+                        prefixIcon: Icon(Icons.contacts,color: Colors.deepPurple)
+                    ),
+                    // ignore: missing_return
+                    validator: (invitation_code) {
+                      if((invitation_code==null)||(invitation_code.isEmpty)) {
+                        return "Please Enter a invitation code ";
+                      }
+                    },
+                    onSaved: (invitation_code){
+                      this.invitationcode=invitation_code;
+                    },
+                    keyboardType: TextInputType.text,
+                    style: new TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),SizedBox(height: 20),
                   new TextFormField(
                     decoration: new InputDecoration(
                         labelText: "Enter Password",
@@ -104,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                         prefixIcon: Icon(Icons.keyboard_hide,color: Colors.deepPurple)
                     ),
                     validator: (password) {
-                      if(password.length<8) {
+                      if(password.length<8 || password.isEmpty) {
                         return "Please The lenghtof the Password should be greather than 8 characters";
                       }
                     },
@@ -127,8 +179,8 @@ class _SignUpState extends State<SignUp> {
                         prefixIcon: Icon(Icons.keyboard_hide,color: Colors.deepPurple)
                     ),
                     validator: (password2) {
-                      if(password2.length<8) {
-                        return "Please The lenghtof the Password should be greather than 8 characters";
+                      if(password2.length<8 || password2.isEmpty || password != password2) {
+                        return "The lenghtof the Password should be greather than 8 characters or the password must match ";
                       }
                     },
                     onSaved: (password2){
@@ -141,47 +193,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                   )
 
-                  ,SizedBox(height: 20),
-                  new TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: "Enter User Name",
-                      fillColor: Colors.white,
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      prefixIcon: Icon(Icons.contacts,color: Colors.deepPurple)
-                    ),
-                    validator: (username) {
-                      // ana mal9it ta condition nderha
-                    },
-                    onSaved: (username){
-                      this.userName=username;
-                    },
-                    keyboardType: TextInputType.text,
-                    style: new TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),SizedBox(height: 20),
-                  new TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: "Enter your phone number",
-                      fillColor: Colors.white,
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                      prefixIcon: Icon(Icons.phone,color: Colors.deepPurple)
-                    ),
-                    validator: (phone ) {
-                      // ana mal9it ta condition nderha
-                    },
-                    onSaved: (phone){
-                      this.phoneNumber=phone;
-                    },
-                    keyboardType: TextInputType.phone,
-                    style: new TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  )
+                  ,SizedBox(height: 20),SizedBox(height: 20)
+
                   ,SizedBox(height: 30,),Center(
                     child:ProgressButton(
                       borderRadius: 20,
@@ -199,9 +212,7 @@ class _SignUpState extends State<SignUp> {
                       width: 120,
                       height: 50,
                       onPressed: () async {
-                        submit();
-                        int score = await Future.delayed(
-                            const Duration(milliseconds: 3000), () => 42);
+                        await submit();
 // After [onPressed], it will trigger animation running backwards, from end to beginning
                         return () {
 // Optional returns is returning a function that can be called
@@ -225,9 +236,9 @@ class _SignUpState extends State<SignUp> {
   }
 
 
-  Future<http.Response> submitInfo({String email, String password,String password2,String username}) async {
+  Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
     return http.post(
-      'http://192.168.1.10:8000/register/',
+      'http://192.168.1.10:8000/registration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -236,6 +247,7 @@ class _SignUpState extends State<SignUp> {
         'username':username,
         'password':password,
         'password2':password2,
+        'invitationcode':invitationcode
       }),
     );
   }
@@ -249,13 +261,23 @@ class _SignUpState extends State<SignUp> {
           good_internet=true;
           print("password : " + this.password);
           print("email : " + this.email);
-          submitInfo(email: this.email,password: this.password,password2: this.password2,username: this.userName).then((onValue){
+          submitInfo(email: this.email,password: this.password,password2: this.password2,username: this.userName,invitationcode: this.invitationcode).then((onValue) async {
             if (json.decode(onValue.body)["response"] != null){
+              wrongInfo=false;
+              wrongInfoMsg="";
               print("token "+json.decode(onValue.body)["token"].toString());
+              await new Future.delayed(const Duration(seconds : 5));
+              Navigator.pushNamed(
+                  context, '/verify_info', arguments: {
+                "token": json.decode(onValue.body)["token"].toString()
+              });
             }else{
               wrongInfo=true;
               wrongInfoMsg = json.decode(onValue.body).toString();
-              print("we have an error "+json.decode(onValue.body)["non_field_errors"].toString());
+              if( json.decode(onValue.body)["response"].toString()=="null"){
+                wrongInfoMsg ="there something wrong in your info ";
+              }
+              print("we have an error "+json.decode(onValue.body)["response"].toString());
               setState(() {
 
               });
