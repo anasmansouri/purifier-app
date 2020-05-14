@@ -179,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                         prefixIcon: Icon(Icons.keyboard_hide,color: Colors.deepPurple)
                     ),
                     validator: (password2) {
-                      if(password2.length<8 || password2.isEmpty || password != password2) {
+                      if(password2.length<8 || password2.isEmpty) {
                         return "The lenghtof the Password should be greather than 8 characters or the password must match ";
                       }
                     },
@@ -252,7 +252,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
   Future<void> submit() async {
-    if (formKey.currentState.validate()) {
+    if (formKey.currentState.validate() && (this.password == this.password2)) {
       formKey.currentState.save();
       try {
         final result = await InternetAddress.lookup('google.com');

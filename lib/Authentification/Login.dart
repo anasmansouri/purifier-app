@@ -144,7 +144,7 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 // Sign up
                                 Navigator.pushReplacementNamed(
-                                    context, '/Login');
+                                    context, '/SignUp');
                               },
                               child: Text(
                                 "create account",
@@ -159,6 +159,8 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 // forget password
 
+                                Navigator.pushReplacementNamed(
+                                    context, '/forgotPassword');
 
                               },
                               child: Text(

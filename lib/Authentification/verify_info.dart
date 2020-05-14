@@ -58,10 +58,10 @@ class _Verify_emailState extends State<Verify_email> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-            Text("Enter the verification code here",style: TextStyle(
+            Text("Email verification",style: TextStyle(
                 color: Colors.deepPurple,
-                fontSize: 25
-            )),SizedBox(height: height/30,),
+                fontSize: 29
+            )),SizedBox(height: height/20,),
             TextFormField(
               onSaved: (input) {
                 code = input;
@@ -75,11 +75,11 @@ class _Verify_emailState extends State<Verify_email> {
                   border: OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(25.0),
                   ),
-                  labelText: "verification code",
+                  labelText: "Enter the verification code",
                   prefixIcon: Icon(Icons.security,
                       color: Colors.deepPurple)
               ),
-            ),Center(
+            ),SizedBox(height: 18,),Center(
                   child:ProgressButton(
                     borderRadius: 20,
                     color: Colors.deepPurple,
