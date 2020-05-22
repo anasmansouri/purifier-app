@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   String password;
   bool wrongInfo =false;
   bool good_internet= true;
-
+  String wrongInfoMsg="";
   Widget Alert(){
     if(!good_internet){
       return Text("no internet connexion ",style: TextStyle(
@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
           fontSize: 15
       ),);
     }else if(wrongInfo){
-      return Text("Wrong informations ",style: TextStyle(
+      return Text(wrongInfoMsg,style: TextStyle(
         color: Colors.red,
         fontSize: 15
       ),);
@@ -85,7 +85,7 @@ class _LoginState extends State<Login> {
                           username = input;
                         },
                         validator: (input) {
-                          if((username==null)||(username.isEmpty)) {
+                          if((input==null)||(input.isEmpty)) {
                             return "Please Enter a username ";
                           }
                         },
@@ -189,7 +189,7 @@ class _LoginState extends State<Login> {
 
   Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
-      'http://192.168.1.10:8000/login/',
+      'http://192.168.1.4:8000/security/api-token-auth/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -224,13 +224,13 @@ class _LoginState extends State<Login> {
           print("username : " + this.username);
           submitInfo(this.username, this.password).then((onValue){
             if (json.decode(onValue.body)["token"] != null){
-              print("token "+json.decode(onValue.body)["token"].toString());
-              is_admin(json.decode(onValue.body)["token"]).then((onValue){
-                print(onValue.body);
-              });
+              print("info \n"+json.decode(onValue.body).toString());
+              wrongInfo=false;
+              wrongInfoMsg="";
             }else{
               wrongInfo=true;
-              print("we have an error "+json.decode(onValue.body)["non_field_errors"].toString());
+              wrongInfoMsg=json.decode(onValue.body)["non_field_errors"][0].toString();
+              print("we have an error "+json.decode(onValue.body)["non_field_errors"][0].toString());
               setState(() {
 
               });

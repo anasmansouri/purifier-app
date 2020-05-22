@@ -18,7 +18,7 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   String username ;
-  String email;
+  String invitationcode;
 
   bool wrongInfo =false;
   bool good_internet= true;
@@ -64,19 +64,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               )),SizedBox(height: height/10,),
               TextFormField(
                 onSaved: (input) {
-                  this.email = input;
+                  this.invitationcode = input;
                 },
-                validator: (email) {
-                  if(!EmailValidator.validate(email)) {
-                    return "Please Enter an Email";
+                validator: (invitationcode) {
+                  if((invitationcode==null)||(invitationcode.isEmpty)) {
+                    return "Please Enter your invitation code ";
                   }
                 },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(25.0),
                     ),
-                    labelText: "email",
-                    prefixIcon: Icon(Icons.email,
+                    labelText: "invitationcode",
+                    prefixIcon: Icon(Icons.contacts,
                         color: Colors.deepPurple)
                 ),
               ),SizedBox(height: height/40,)
@@ -136,14 +136,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );;
   }
-  Future<http.Response> submitInfo(String username, String email) async {
+  Future<http.Response> submitInfo(String username, String invitationcode) async {
     return http.post(
-      'http://192.168.1.10:8000/forgotpassword/',
+      'http://192.168.1.4:8000/security/forgotpassword/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'email': email,
+        'invitationcode': invitationcode,
         'username':username
       }),
     );
@@ -157,14 +157,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           print('connected');
           good_internet=true;
-          print("email : " + this.email);
+          print("invitation code : " + this.invitationcode);
           print("username : " + this.username);
-          submitInfo(this.username, this.email).then((onValue){
-            if (json.decode(onValue.body)["response"] == "true"){
+          submitInfo(this.username, this.invitationcode).then((onValue){
+            if (json.decode(onValue.body)["response"] != null){
               print("response "+json.decode(onValue.body)["response"].toString());
+              Navigator.pushNamed(
+                  context, '/Login');
             }else{
               wrongInfo=true;
-              print("we have an error "+json.decode(onValue.body)["response"].toString());
+              wrongInfoMsg=json.decode(onValue.body)["error"].toString();
+              print("we have an error "+json.decode(onValue.body)["error"].toString());
               setState(() {
 
               });

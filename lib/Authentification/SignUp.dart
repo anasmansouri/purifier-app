@@ -40,15 +40,17 @@ class _SignUpState extends State<SignUp> {
   bool good_internet= true;
   String wrongInfoMsg="";
   Widget Alert(){
+    String msg ="";
     if(!good_internet){
-      return Text("no internet connexion ",style: TextStyle(
+      return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
       ),);
     }else if(wrongInfo){
-      return Text(wrongInfoMsg,style: TextStyle(
+      return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
-          fontSize: 15
+          fontSize: 20,
+
       ),);
     }else{
       return SizedBox(height: 0,width: 0,);
@@ -76,7 +78,7 @@ class _SignUpState extends State<SignUp> {
                         size: 130.0,
                       ),
                     //IconTheme
-                  ),Alert(),
+                  ),Center(child: Alert()),
                   SizedBox(height: 60,),
                   new TextFormField(
                     decoration: new InputDecoration(
@@ -237,22 +239,27 @@ class _SignUpState extends State<SignUp> {
 
 
   Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
-    return http.post(
-      'http://192.168.1.10:8000/registration/',
+    return http.put(
+      'http://192.168.1.4:8000/security/registration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        'email': email,
-        'username':username,
-        'password':password,
-        'password2':password2,
-        'invitationcode':invitationcode
-      }),
+      body: jsonEncode(<String, dynamic>{
+          "user":{
+            "username":username,
+            "email":email,
+            "password":password
+          },
+          "invitationcode":invitationcode,
+          "password2":password2
+        }
+      ),
     );
   }
   Future<void> submit() async {
-    if (formKey.currentState.validate() && (this.password == this.password2)) {
+    print("rahna brakna ");
+    if (formKey.currentState.validate()) {
+      print("rahna d5alna");
       formKey.currentState.save();
       try {
         final result = await InternetAddress.lookup('google.com');
@@ -266,18 +273,17 @@ class _SignUpState extends State<SignUp> {
               wrongInfo=false;
               wrongInfoMsg="";
               print("token "+json.decode(onValue.body)["token"].toString());
-              await new Future.delayed(const Duration(seconds : 5));
               Navigator.pushNamed(
                   context, '/verify_info', arguments: {
                 "token": json.decode(onValue.body)["token"].toString()
               });
             }else{
               wrongInfo=true;
-              wrongInfoMsg = json.decode(onValue.body).toString();
-              if( json.decode(onValue.body)["response"].toString()=="null"){
+              wrongInfoMsg = json.decode(onValue.body)["error"].toString();
+              if( json.decode(onValue.body)["error"].toString()=="null"){
                 wrongInfoMsg ="there something wrong in your info ";
               }
-              print("we have an error "+json.decode(onValue.body)["response"].toString());
+              print("we have an error "+json.decode(onValue.body)["error"].toString());
               setState(() {
 
               });

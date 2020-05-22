@@ -61,14 +61,14 @@ class _Verify_emailState extends State<Verify_email> {
             Text("Email verification",style: TextStyle(
                 color: Colors.deepPurple,
                 fontSize: 29
-            )),SizedBox(height: height/20,),
+            )),Center(child: Alert()),SizedBox(height: height/20,),
             TextFormField(
               onSaved: (input) {
                 code = input;
               },
               validator: (input) {
-                if ((int.parse(input) is int)|| input.isNotEmpty ||input != null) {} else {
-                  return "there is something wrong there  ";
+                if (( input !=null ||input.isNotEmpty || int.parse(input) is int)) {} else {
+                  return "please make sure that the code is correct";
                 }
               },
               decoration: InputDecoration(
@@ -121,7 +121,7 @@ class _Verify_emailState extends State<Verify_email> {
 
   Future<http.Response> submitInfo({String code}) async {
     return http.post(
-      'http://192.168.1.10:8000/verify_email/',
+      'http://192.168.1.4:8000/security/verify_email/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'
@@ -144,16 +144,16 @@ class _Verify_emailState extends State<Verify_email> {
             if (json.decode(onValue.body)["response"] != null){
               wrongInfo=false;
               wrongInfoMsg="";
-              Toast.show("your email is verified", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+              Toast.show("your email is verified", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
               Navigator.pushNamed(
                   context, '/Login');
                         }else{
               wrongInfo=true;
-              wrongInfoMsg = json.decode(onValue.body).toString();
-              if( json.decode(onValue.body)["response"].toString()=="null"){
+              wrongInfoMsg = json.decode(onValue.body)["error"].toString();
+              if( json.decode(onValue.body)["error"].toString()=="null"){
                 wrongInfoMsg ="there something wrong in your code ";
               }
-              print("we have an error "+json.decode(onValue.body)["response"].toString());
+              print("we have an error "+json.decode(onValue.body)["error"].toString());
               setState(() {
 
               });
