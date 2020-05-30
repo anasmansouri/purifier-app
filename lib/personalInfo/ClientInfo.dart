@@ -24,7 +24,7 @@ class _ClientInfoState extends State<ClientInfo> {
       onTap: (){
         Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PersonalInformations(email: widget.mail)),
+        MaterialPageRoute(builder: (context) => Profile_Client()),
       );
       },
       child: Container(

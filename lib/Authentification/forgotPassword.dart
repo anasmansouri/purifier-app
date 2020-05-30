@@ -138,7 +138,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
   Future<http.Response> submitInfo(String username, String invitationcode) async {
     return http.post(
-      'http://192.168.1.4:8000/security/forgotpassword/',
+      'http://192.168.1.10:8000/security/forgotpassword/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

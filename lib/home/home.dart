@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
 
   Future<List<dynamic>> lookForClient({String name}) async {
     print("d6alnaa");
-    String urlJson = "http://192.168.1.9:8000/managment/autoCompletion/?name=$name";
+    String urlJson = "http://192.168.1.10:8000/managment/autoCompletion/?name=$name";
     var res = await http.get(Uri.encodeFull(urlJson));
     var resBody = json.decode(res.body);
     return resBody;

@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:purifiercompanyapp/Animations/animation.dart';
+import 'package:purifiercompanyapp/Client/home.dart';
 import 'package:purifiercompanyapp/home/home.dart';
 import 'package:purifiercompanyapp/personalInfo/PersonalInformations.dart';
 import 'dart:io';
@@ -189,7 +190,7 @@ class _LoginState extends State<Login> {
 
   Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
-      'http://192.168.1.4:8000/security/api-token-auth/',
+      'http://192.168.1.10:8000/security/api-token-auth/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -227,6 +228,12 @@ class _LoginState extends State<Login> {
               print("info \n"+json.decode(onValue.body).toString());
               wrongInfo=false;
               wrongInfoMsg="";
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FancyBottomBarPage(tocken:json.decode(onValue.body)["token"] ,userId: json.decode(onValue.body)["user_id"].toString(),), ));
+
+                //  MaterialPageRoute(builder: (context) => Profile_Client(tocken:json.decode(onValue.body)["token"] ,userId: json.decode(onValue.body)["user_id"].toString(),)),
+
             }else{
               wrongInfo=true;
               wrongInfoMsg=json.decode(onValue.body)["non_field_errors"][0].toString();

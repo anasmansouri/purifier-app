@@ -121,7 +121,7 @@ class _Verify_emailState extends State<Verify_email> {
 
   Future<http.Response> submitInfo({String code}) async {
     return http.post(
-      'http://192.168.1.4:8000/security/verify_email/',
+      'http://192.168.1.10:8000/security/verify_email/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'
