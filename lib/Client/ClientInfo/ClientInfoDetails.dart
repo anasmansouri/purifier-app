@@ -31,7 +31,7 @@ class _Profile_ClientState extends State<Profile_Client> {
 
   Future<dynamic> get_client_info(String token) async {
     return http.get(
-        'http://192.168.1.10:8000/security/accounts/'+widget.userId,
+        'http://192.168.1.4:8000/security/accounts/'+widget.userId,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'token $token'
@@ -60,7 +60,7 @@ class _Profile_ClientState extends State<Profile_Client> {
 
     client_info(token: widget.tocken).then((value){
       this.email=value["user"]["email"];
-      this.mobileNumber=value["user"]["email"];
+      this.mobileNumber=value["mobile"];
       this.contactName=value["user"]["username"];
       setState(() {
         this.no_data_problem=true;
@@ -119,7 +119,7 @@ class _Profile_ClientState extends State<Profile_Client> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[FlatButton.icon(
                 icon: Icon(
-                  FontAwesomeIcons.handHoldingWater, color: color,
+                  FontAwesomeIcons.phone, color: color,
                 ),
                 label: Text(mobile,
                   style: style,),
