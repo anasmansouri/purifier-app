@@ -23,6 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   bool wrongInfo =false;
   bool good_internet= true;
   String wrongInfoMsg="";
+  Color color = Colors.blue;
   final formKey = GlobalKey<FormState>();
 
   Widget Alert(){
@@ -59,7 +60,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text("Enter your informations ",style: TextStyle(
-                  color: Colors.deepPurple,
+                  color: this.color,
                   fontSize: 30
               )),SizedBox(height: height/10,),
               TextFormField(
@@ -77,7 +78,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                     labelText: "invitationcode",
                     prefixIcon: Icon(Icons.contacts,
-                        color: Colors.deepPurple)
+                        color: this.color)
                 ),
               ),SizedBox(height: height/40,)
               ,TextFormField(
@@ -96,12 +97,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                     labelText: "username",
                     prefixIcon: Icon(Icons.contacts,
-                        color: Colors.deepPurple)
+                        color: this.color)
                 ),
               ),SizedBox(height: height/30,),Center(
                   child:ProgressButton(
                     borderRadius: 20,
-                    color: Colors.deepPurple,
+                    color: this.color,
                     defaultWidget: const Text('Submit',
                       style: TextStyle(
                         fontSize: 20,
@@ -138,7 +139,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
   Future<http.Response> submitInfo(String username, String invitationcode) async {
     return http.post(
-      'http://192.168.1.10:8000/security/forgotpassword/',
+      'http://192.168.1.3:8000/security/forgotpassword/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

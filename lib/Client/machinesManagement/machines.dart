@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
  import 'package:http/http.dart' as http;
-import 'package:purifiercompanyapp/personalInfo/ClientInfo.dart';
+
+import 'MachineCard.dart';
 
 class Machines extends StatefulWidget {
+  String tocken;
+  Machines({this.tocken});
   @override
   _MachinesState createState() => _MachinesState();
 }
@@ -17,10 +20,10 @@ class _MachinesState extends State<Machines> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForClient({String name}) async {
-    String urlJson = "http://192.168.1.4:8000/management/Machines/?search=$name";
+    String urlJson = "http://192.168.1.3:8000/management/Machines/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization':'token 34e23d2c940dbdad17f7ffbf8df6efd302b7a001'
+      'Authorization':'token '+widget.tocken
     });
     var resBody = json.decode(res.body);
     print(resBody.toString());
@@ -63,7 +66,7 @@ class _MachinesState extends State<Machines> {
                     return   ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext ctxt, int index) =>  ClientInfo(machineID: snapshot.data[index]["machineid"],nextservicedate: snapshot.data[index]["nextservicedate"],location:  snapshot.data[index]["installaddress1"],producttype: snapshot.data[index]["producttype"] ,),
+                      itemBuilder: (BuildContext ctxt, int index) =>  MachineCard(machineID: snapshot.data[index]["machineid"],nextservicedate: snapshot.data[index]["nextservicedate"],location:  snapshot.data[index]["installaddress1"],producttype: snapshot.data[index]["producttype"] ,mac: snapshot.data[index]["mac"],),
                     );
                   }else{
                     return SpinKitCircle(

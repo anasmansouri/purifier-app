@@ -9,6 +9,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import '../home.dart';
+
 class Verify_email extends StatefulWidget {
   @override
   _Verify_emailState createState() => _Verify_emailState();
@@ -19,6 +21,8 @@ class _Verify_emailState extends State<Verify_email> {
   bool wrongInfo =false;
   bool good_internet= true;
   String wrongInfoMsg="";
+  Color color =Colors.blue;
+
   Map data={};
   final formKey = GlobalKey<FormState>();
   String token="";
@@ -59,7 +63,7 @@ class _Verify_emailState extends State<Verify_email> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
             Text("Email verification",style: TextStyle(
-                color: Colors.deepPurple,
+                color: this.color,
                 fontSize: 29
             )),Center(child: Alert()),SizedBox(height: height/20,),
             TextFormField(
@@ -77,20 +81,20 @@ class _Verify_emailState extends State<Verify_email> {
                   ),
                   labelText: "Enter the verification code",
                   prefixIcon: Icon(Icons.security,
-                      color: Colors.deepPurple)
+                      color: this.color)
               ),
             ),SizedBox(height: 18,),Center(
                   child:ProgressButton(
                     borderRadius: 20,
-                    color: Colors.deepPurple,
+                    color: this.color,
                     defaultWidget: const Text('Submit',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),),
 //  progressWidget: const CircularProgressIndicator(),
-                    progressWidget:SpinKitRotatingCircle   (
-                      color: Colors.red,
+                    progressWidget:SpinKitRotatingCircle(
+                      color: this.color,
                       size: 50.0,
                     ) ,
                     width: 120,
@@ -121,7 +125,7 @@ class _Verify_emailState extends State<Verify_email> {
 
   Future<http.Response> submitInfo({String code}) async {
     return http.post(
-      'http://192.168.1.10:8000/security/verify_email/',
+      'http://192.168.1.3:8000/security/verify_email/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'
@@ -145,8 +149,9 @@ class _Verify_emailState extends State<Verify_email> {
               wrongInfo=false;
               wrongInfoMsg="";
               Toast.show("your email is verified", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-              Navigator.pushNamed(
-                  context, '/Login');
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => FancyBottomBarPage(token:token,userId: data["userId"].toString(),), ));
                         }else{
               wrongInfo=true;
               wrongInfoMsg = json.decode(onValue.body)["error"].toString();

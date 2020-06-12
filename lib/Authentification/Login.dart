@@ -10,9 +10,9 @@ import 'package:location/location.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:purifiercompanyapp/Animations/animation.dart';
 import 'package:purifiercompanyapp/Client/home.dart';
-import 'package:purifiercompanyapp/home/home.dart';
-import 'package:purifiercompanyapp/personalInfo/PersonalInformations.dart';
+import 'package:purifiercompanyapp/admin/home.dart';
 import 'dart:io';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
   String password;
   bool wrongInfo =false;
   bool good_internet= true;
+  Color color =Colors.blue;
   String wrongInfoMsg="";
   Widget Alert(){
     if(!good_internet){
@@ -67,7 +68,7 @@ class _LoginState extends State<Login> {
               Center(
                 child: Text("Login",
                   style: TextStyle(
-                      color: Colors.deepPurple,
+                      color: this.color,
                       fontSize: 50,
                       fontFamily: 'BalooBhai'
                   ),)
@@ -96,7 +97,7 @@ class _LoginState extends State<Login> {
                             ),
                             labelText: "username",
                             prefixIcon: Icon(Icons.contacts,
-                                color: Colors.deepPurple)
+                                color: this.color)
                         ),
                       ), SizedBox(height: height / 30,),
                       TextFormField(
@@ -114,14 +115,14 @@ class _LoginState extends State<Login> {
                             ),
                             labelText: "Password",
                             prefixIcon: Icon(Icons.keyboard_hide,
-                                color: Colors.deepPurple)
+                                color: this.color)
                         ),
                         obscureText: true,
                       ), SizedBox(height: height / 30,),
                       Center(
                         child: ProgressButton(
                             borderRadius: 20,
-                            color: Colors.deepPurple,
+                            color: this.color,
                             defaultWidget: const Text('Submit',
                               style: TextStyle(
                                 fontSize: 20,
@@ -129,7 +130,7 @@ class _LoginState extends State<Login> {
                               ),),
                             //  progressWidget: const CircularProgressIndicator(),
                             progressWidget: SpinKitRotatingCircle(
-                              color: Colors.red,
+                              color: this.color,
                               size: 50.0,
                             ),
                             width: width / 3.5,
@@ -150,7 +151,7 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 "create account",
                                 style: TextStyle(
-                                    color: Colors.deepPurple,
+                                    color: this.color,
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline),
@@ -167,7 +168,7 @@ class _LoginState extends State<Login> {
                               child: Text(
                                 "Forgot password",
                                 style: TextStyle(
-                                    color: Colors.deepPurple,
+                                    color: this.color,
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline),
@@ -190,7 +191,7 @@ class _LoginState extends State<Login> {
 
   Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
-      'http://192.168.1.10:8000/security/api-token-auth/',
+      'http://192.168.1.3:8000/security/api-token-auth/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -198,18 +199,6 @@ class _LoginState extends State<Login> {
         'username': username,
         'password':password
       }),
-    );
-  }
-
-
-
-  Future<http.Response> is_admin(String token) async {
-    return http.get(
-      'http://192.168.1.10:8000/is_admin/',
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':'token $token'
-      }
     );
   }
 
@@ -224,20 +213,34 @@ class _LoginState extends State<Login> {
           print("password : " + this.password);
           print("username : " + this.username);
           submitInfo(this.username, this.password).then((onValue){
+            print(onValue.body.toString());
             if (json.decode(onValue.body)["token"] != null){
-              print("info \n"+json.decode(onValue.body).toString());
+              print("token \n"+json.decode(onValue.body)["token"]);
               wrongInfo=false;
               wrongInfoMsg="";
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FancyBottomBarPage(tocken:json.decode(onValue.body)["token"] ,userId: json.decode(onValue.body)["user_id"].toString(),), ));
+              if (json.decode(onValue.body)["is_admin"]){
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context)
+                    => FancyBottomBarPageAdmin(token:json.decode(onValue.body)["token"] ,
+                      userId: json.decode(onValue.body)["user_id"].toString(),), ));
+              }else{
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context)
+                    => FancyBottomBarPage(token:json.decode(onValue.body)["token"] ,
+                      userId: json.decode(onValue.body)["user_id"].toString(),), ));
+              }
 
-                //  MaterialPageRoute(builder: (context) => Profile_Client(tocken:json.decode(onValue.body)["token"] ,userId: json.decode(onValue.body)["user_id"].toString(),)),
+            }else if(json.decode(onValue.body)["error"] != null){
+              wrongInfo=true;
+              wrongInfoMsg=json.decode(onValue.body)["error"].toString();
+              setState(() {
 
+              });
             }else{
               wrongInfo=true;
               wrongInfoMsg=json.decode(onValue.body)["non_field_errors"][0].toString();
-              print("we have an error "+json.decode(onValue.body)["non_field_errors"][0].toString());
               setState(() {
 
               });
@@ -250,22 +253,6 @@ class _LoginState extends State<Login> {
           good_internet= false;
         });
       }
-    /*  submitInfo(this.email, this.password).then((onValue){
-        if(onValue){
-          wrongInfo = false;
-          if(Client){
-            Navigator.push(context, SlideRightRoute(page: PersonalInformations(email: this.email)));
-          }else{
-            Navigator.push(context, SlideRightRoute(page: Home()));
-          }
-          print("client $Client");
-        }else{
-          print("client $Client");
-          setState(() {
-            wrongInfo = true;
-          });
-        }
-      });  */
     }
   }
 }

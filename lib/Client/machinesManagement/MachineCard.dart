@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/Client/machinesManagement/machineDetails.dart';
-import 'package:purifiercompanyapp/personalInfo/PersonalInformations.dart';
 
-class ClientInfo extends StatefulWidget {
+class MachineCard extends StatefulWidget {
   String machineID ;
   String producttype ;
   String nextservicedate ;
@@ -13,17 +12,17 @@ class ClientInfo extends StatefulWidget {
   String mac;
 
   Color color =Colors.blue;
-  ClientInfo({this.machineID,this.location,this.producttype,this.nextservicedate,this.main_pack_package_code,this.mac});
+  MachineCard({this.machineID,this.location,this.producttype,this.nextservicedate,this.main_pack_package_code,this.mac});
 
   @override
-  _ClientInfoState createState() => _ClientInfoState();
+  _MachineCardState createState() => _MachineCardState();
 }
 
-class _ClientInfoState extends State<ClientInfo> {
+class _MachineCardState extends State<MachineCard> {
   static Color c = Colors.white;
-
   TextStyle styleLabel = TextStyle(color: c,fontSize: 20,fontWeight: FontWeight.w400);
   TextStyle styleData = TextStyle(color: c,fontSize: 20);
+  Map<String, String> typeOfMachine = {'WPU': 'Water Purifier', 'U': 'Under Sink', 'F': 'Filter'};
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,7 +58,7 @@ class _ClientInfoState extends State<ClientInfo> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.robot,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.producttype.toString(),style: styleData,)
+                  Text(typeOfMachine[widget.producttype] .toString(),style: styleData,)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[

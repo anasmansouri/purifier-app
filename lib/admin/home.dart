@@ -9,17 +9,20 @@ import 'package:purifiercompanyapp/Client/update/updateInfo.dart';
 import 'package:purifiercompanyapp/Client/machinesManagement/machines.dart';
 import 'dart:async';
 import 'package:purifiercompanyapp/Client/casesManagement/cases.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:purifiercompanyapp/admin/clients/showAll.dart';
 
-class FancyBottomBarPage extends StatefulWidget {
+
+class FancyBottomBarPageAdmin extends StatefulWidget {
   // static final String path = "lib/src/pages/misc/navybar.dart";
   String token;
   String userId;
-  FancyBottomBarPage({this.token,this.userId});
+  FancyBottomBarPageAdmin({this.token,this.userId});
   @override
-  _FancyBottomBarPageState createState() => _FancyBottomBarPageState();
+  _FancyBottomBarPageAdminState createState() => _FancyBottomBarPageAdminState();
 }
 
-class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
+class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
   @override
   void dispose() {
     indexcontroller.close();
@@ -44,16 +47,22 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
         controller: pageController,
         children: <Widget>[
           Center(
-            child: Machines(tocken: widget.token,),
+            child:    showAllClients(tocken: widget.token,)/*Machines(tocken: widget.token,)*/,
           ),
           Center(
-             child:  ClientInfoDetails(tocken:widget.token ,userId: widget.userId,),
+             child: Text("Main pack") /*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
           ),
           Center(
-            child: Cases(tocken: widget.token,),
+            child:   Text("machines") /*Cases(tocken: widget.token,)*/,
           ),
           Center(
-            child: SettingsOnePage(token:widget.token),
+            child: Text("techniciew")/*SettingsOnePage(token:widget.token)*/,
+          ),
+          Center(
+            child: Text("cases")/*SettingsOnePage(token:widget.token)*/,
+          ),
+          Center(
+            child: Text("filter")/*SettingsOnePage(token:widget.token)*/,
           ),
         ],
       ),
@@ -68,12 +77,15 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
                 FancyBottomNavigationItem(
                     icon: Icon(Icons.home), title: Text('Home')),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.person), title: Text('User')),
-
+                    icon: Icon(Icons.inbox), title: Text("Main pack")),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.menu), title: Text('details')),
+                    icon: Icon(FontAwesomeIcons.robot), title: Text("machines")),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.settings), title: Text('Settings')),
+                    icon: Icon(Icons.person), title:  Text("techniciew")),
+                FancyBottomNavigationItem(
+                    icon: Icon(FontAwesomeIcons.screwdriver), title: Text("cases")),
+                FancyBottomNavigationItem(
+                    icon: Icon(FontAwesomeIcons.filter), title: Text("filter")),
               ],
               onItemSelected: (int value) {
                 indexcontroller.add(value);

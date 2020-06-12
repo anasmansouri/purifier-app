@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
   String password2;
   String userName;
   String invitationcode;
-
+  Color color = Colors.blue;
 
   bool wrongInfo =false;
   bool good_internet= true;
@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                   Center(
                    child :  Icon(
                         Icons.perm_identity,
-                        color: Colors.deepPurple,
+                        color: this.color,
                         size: 130.0,
                       ),
                     //IconTheme
@@ -87,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
-                        prefixIcon: Icon(Icons.email,color: Colors.deepPurple)
+                        prefixIcon: Icon(Icons.email,color: this.color)
                     ),
                     validator: (email) {
                       if(!EmailValidator.validate(email)) {
@@ -110,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                 border: new OutlineInputBorder(
                 borderRadius: new BorderRadius.circular(25.0),
           ),
-            prefixIcon: Icon(Icons.contacts,color: Colors.deepPurple)
+            prefixIcon: Icon(Icons.contacts,color: this.color)
         ),
         // ignore: missing_return
         validator: (username) {
@@ -132,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.contacts,color: Colors.deepPurple)
+                        prefixIcon: Icon(Icons.contacts,color: this.color)
                     ),
                     // ignore: missing_return
                     validator: (invitation_code) {
@@ -155,7 +155,7 @@ class _SignUpState extends State<SignUp> {
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.keyboard_hide,color: Colors.deepPurple)
+                        prefixIcon: Icon(Icons.keyboard_hide,color: this.color)
                     ),
                     validator: (password) {
                       if(password.length<8 || password.isEmpty) {
@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
-                        prefixIcon: Icon(Icons.keyboard_hide,color: Colors.deepPurple)
+                        prefixIcon: Icon(Icons.keyboard_hide,color: this.color)
                     ),
                     validator: (password2) {
                       if(password2.length<8 || password2.isEmpty) {
@@ -200,7 +200,7 @@ class _SignUpState extends State<SignUp> {
                   ,SizedBox(height: 30,),Center(
                     child:ProgressButton(
                       borderRadius: 20,
-                      color: Colors.deepPurple,
+                      color: this.color,
                       defaultWidget: const Text('Submit',
                         style: TextStyle(
                           fontSize: 20,
@@ -240,7 +240,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
     return http.put(
-      'http://192.168.1.10:8000/security/registration/',
+      'http://192.168.1.3:8000/security/registration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -257,9 +257,8 @@ class _SignUpState extends State<SignUp> {
     );
   }
   Future<void> submit() async {
-    print("rahna brakna ");
+
     if (formKey.currentState.validate()) {
-      print("rahna d5alna");
       formKey.currentState.save();
       try {
         final result = await InternetAddress.lookup('google.com');
@@ -299,4 +298,3 @@ class _SignUpState extends State<SignUp> {
     }
   }
   }
-

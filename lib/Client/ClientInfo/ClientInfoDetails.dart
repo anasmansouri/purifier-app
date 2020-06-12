@@ -6,32 +6,31 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:line_icons/line_icons.dart';
-// avatar
-import "../customiseWidgets/my_flutter_app_icons.dart" as water;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class Profile_Client extends StatefulWidget {
+class ClientInfoDetails extends StatefulWidget {
 
   String tocken;
   String userId;
-  Profile_Client({this.tocken,this.userId});
+  ClientInfoDetails({this.tocken,this.userId});
   @override
-  _Profile_ClientState createState() => _Profile_ClientState();
+  _ClientInfoDetailsState createState() => _ClientInfoDetailsState();
 }
 
-class _Profile_ClientState extends State<Profile_Client> {
-  String email;
-  String contactName;
-  String mobileNumber;
+class _ClientInfoDetailsState extends State<ClientInfoDetails> {
+  String email =" ";
+  String contactName= " ";
+  String mobileNumber= " ";
   bool good_internet_connexion=false;
   bool no_data_problem=false;
   static Color color =Colors.blue;
   TextStyle style = new TextStyle(fontSize: 20,color: color);
 
   Future<dynamic> get_client_info(String token) async {
+    print( 'http://192.168.1.3:8000/security/accounts/'+widget.userId);
     return http.get(
-        'http://192.168.1.4:8000/security/accounts/'+widget.userId,
+        'http://192.168.1.3:8000/security/accounts/'+widget.userId,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'token $token'
@@ -42,6 +41,7 @@ class _Profile_ClientState extends State<Profile_Client> {
   Future<dynamic> client_info({String token}) async {
     var res = await get_client_info(token);
     var resBody = json.decode(res.body);
+    print(resBody);
     return resBody;
   }
 
@@ -59,6 +59,7 @@ class _Profile_ClientState extends State<Profile_Client> {
     }
 
     client_info(token: widget.tocken).then((value){
+      print(value);
       this.email=value["user"]["email"];
       this.mobileNumber=value["mobile"];
       this.contactName=value["user"]["username"];

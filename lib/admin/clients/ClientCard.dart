@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:purifiercompanyapp/Client/machinesManagement/machineDetails.dart';
+import 'package:purifiercompanyapp/admin/clients/ClientDetails.dart';
 
 class ClientCard extends StatefulWidget {
-  String ClientID ;
   String username ;
   String mobile ;
   String joindate;
-
+  String tocken;
+  String email;
+  String billingaddress1;
+  String billingaddress2;
+  bool is_confirmed;
   Color color =Colors.blue;
-  ClientCard({this.ClientID,this.mobile,this.username,this.joindate});
+  ClientCard({this.mobile,this.username,this.joindate,this.tocken,this.email,this.billingaddress1,this.billingaddress2,this.is_confirmed});
 
   @override
   _ClientCardState createState() => _ClientCardState();
@@ -27,7 +30,7 @@ class _ClientCardState extends State<ClientCard> {
       onTap: (){
         Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MachineDetails(machineId: widget.machineID,location: widget.location,producttype: widget.producttype,nextservicedate: widget.nextservicedate,main_pack_package_code: widget.main_pack_package_code,mac: widget.mac,)),
+        MaterialPageRoute(builder: (context) =>ClientDetails(username: widget.username,mobile: widget.mobile,email: widget.email,billingaddress1: widget.billingaddress1,billingaddress2: widget.billingaddress2,is_confirmed: widget.is_confirmed,))
       );
       },
       child: Container(
@@ -45,14 +48,6 @@ class _ClientCardState extends State<ClientCard> {
             padding: const EdgeInsets.fromLTRB(30, 8, 0, 8),
             child: Column(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                   Icon(FontAwesomeIcons.idCard,
-                      color: Colors.white,),
-                    SizedBox(width: 65,),
-                    Text(widget.ClientID,style: styleData,)
-                  ],
-                ),SizedBox(height: 8,),
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.user,color: Colors.white,)
                   ,SizedBox(width: 65,),
@@ -64,12 +59,13 @@ class _ClientCardState extends State<ClientCard> {
                     Text(widget.mobile,style: styleData,)
                   ],
                 ),
+                SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.calendarAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.mobile,style: styleData,)
+                    Text(widget.joindate,style: styleData,)
                   ],
-                )
+                ),
               ],
             ),
           )

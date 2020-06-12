@@ -1,18 +1,20 @@
 /**
- * Author: Siddhartha Joshi
- * profile: https://github.com/cimplesid
+ * Author: Anas Mansouri
+ * profile: https://github.com/anasmansouri
  */
 
 import 'package:flutter/material.dart';
+import 'package:purifiercompanyapp/Client/ClientInfo/ClientInfoDetails.dart';
+import 'package:purifiercompanyapp/Client/update/updateInfo.dart';
+import 'package:purifiercompanyapp/Client/machinesManagement/machines.dart';
 import 'dart:async';
-import 'package:purifiercompanyapp/personalInfo/PersonalInformations.dart';
-
+import 'package:purifiercompanyapp/Client/casesManagement/cases.dart';
 
 class FancyBottomBarPage extends StatefulWidget {
   // static final String path = "lib/src/pages/misc/navybar.dart";
-  String tocken;
+  String token;
   String userId;
-  FancyBottomBarPage({this.tocken,this.userId});
+  FancyBottomBarPage({this.token,this.userId});
   @override
   _FancyBottomBarPageState createState() => _FancyBottomBarPageState();
 }
@@ -30,8 +32,9 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Colors.grey.shade200,
       appBar: AppBar(
-        title: Text('Osmosis'),
+        title: Text("osmosis")
       ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -41,16 +44,16 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
         controller: pageController,
         children: <Widget>[
           Center(
-            child: Text('home'),
+            child: Machines(tocken: widget.token,),
           ),
           Center(
-            child:  Profile_Client(tocken:widget.tocken ,userId: widget.userId,),
+             child:  ClientInfoDetails(tocken:widget.token ,userId: widget.userId,),
           ),
           Center(
-            child: Text('Security'),
+            child: Cases(tocken: widget.token,),
           ),
           Center(
-            child: Text('Message'),
+            child: SettingsOnePage(token:widget.token),
           ),
         ],
       ),
