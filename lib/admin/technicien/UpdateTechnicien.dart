@@ -1,44 +1,47 @@
 import 'dart:convert';
-import 'dart:convert';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
-import 'package:purifiercompanyapp/Animations/animation.dart';
-import 'package:purifiercompanyapp/Authentification/verify_info.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
-// to test if it is an email
-import 'package:email_validator/email_validator.dart';
 
 //test json
 
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import '../home.dart';
 
-class SignUp extends StatefulWidget {
+
+class UpdateTechnicien extends StatefulWidget {
+
+  String tocken;
+  String staffcode ;
+  String staffshort ;
+  String staffname;
+  String staffcontact;
+  String email;
+  String userId;
+  UpdateTechnicien({this.tocken,this.staffshort,this.staffname,this.staffcontact,this.staffcode,this.email,this.userId});
   @override
-  _SignUpState createState() => _SignUpState();
+  _UpdateTechnicienState createState() => _UpdateTechnicienState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _UpdateTechnicienState extends State<UpdateTechnicien> {
 
   final formKey = GlobalKey<FormState>();
-  String email;
-  String password;
-  String password2;
-  String userName;
-  String invitationcode;
+
+
   Color color = Colors.blue;
 
   bool wrongInfo =false;
   bool good_internet= true;
-  String wrongInfoMsg="";
+  String wrongInfoMsg="asljl";
   Widget Alert(){
     String msg ="";
     if(!good_internet){
@@ -80,32 +83,10 @@ class _SignUpState extends State<SignUp> {
                     //IconTheme
                   ),Center(child: Alert()),
                   SizedBox(height: 60,),
-                  new TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: "Enter Email",
-                      fillColor: Colors.white,
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),
-                        prefixIcon: Icon(Icons.email,color: this.color)
-                    ),
-                    validator: (email) {
-                      if(!EmailValidator.validate(email)) {
-                        return "Please Enter an Email";
-                      }
-
-                    },
-                    onSaved: (email){
-                      this.email=email;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    style: new TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  ),SizedBox(height: 20),
                 new TextFormField(
+                  initialValue: widget.staffname,
                 decoration: new InputDecoration(
-                labelText: "Enter User Name",
+                labelText: "Enter staffname",
             fillColor: Colors.white,
                 border: new OutlineInputBorder(
                 borderRadius: new BorderRadius.circular(25.0),
@@ -115,19 +96,22 @@ class _SignUpState extends State<SignUp> {
         // ignore: missing_return
         validator: (username) {
           if((username==null)||(username.isEmpty)) {
-            return "Please Enter a username ";
+            return "Please Enter staffname ";
           }
         },
-        onSaved: (username){
-          this.userName=username;
+        onSaved: (staffname){
+          widget.staffname=staffname;
         },
         keyboardType: TextInputType.text,
         style: new TextStyle(
           fontFamily: "Poppins",
         ),
-      ),SizedBox(height: 20),new TextFormField(
+      ),
+                  SizedBox(height: 20),
+                  new TextFormField(
+                    initialValue: widget.staffcontact,
                     decoration: new InputDecoration(
-                        labelText: "Enter User invitation code ",
+                        labelText: "Enter staffcontact ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
@@ -135,13 +119,13 @@ class _SignUpState extends State<SignUp> {
                         prefixIcon: Icon(Icons.contacts,color: this.color)
                     ),
                     // ignore: missing_return
-                    validator: (invitation_code) {
-                      if((invitation_code==null)||(invitation_code.isEmpty)) {
-                        return "Please Enter a invitation code ";
+                    validator: (staffcontact) {
+                      if((staffcontact==null)||(staffcontact.isEmpty)) {
+                        return "Please Enter staffcontact";
                       }
                     },
-                    onSaved: (invitation_code){
-                      this.invitationcode=invitation_code;
+                    onSaved: (staffcontact){
+                     widget.staffcontact=staffcontact;
                     },
                     keyboardType: TextInputType.text,
                     style: new TextStyle(
@@ -149,55 +133,74 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),SizedBox(height: 20),
                   new TextFormField(
+                    initialValue: widget.staffshort,
                     decoration: new InputDecoration(
-                        labelText: "Enter Password",
+                        labelText: "Enter staffshort ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.keyboard_hide,color: this.color)
+                        prefixIcon: Icon(Icons.contacts,color: this.color)
                     ),
-                    validator: (password) {
-                      if(password.length<8 || password.isEmpty) {
-                        return "Please The lenghtof the Password should be greather than 8 characters";
+                    // ignore: missing_return
+                    validator: (staffshort) {
+                      if((staffshort==null)||(staffshort.isEmpty)) {
+                        return "Please Enter a invitation code ";
                       }
                     },
-                    onSaved: (password){
-                      this.password=password;
+                    onSaved: (staffshort){
+                      widget.staffshort=staffshort;
                     },
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
+                    keyboardType: TextInputType.text,
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
-                  ),SizedBox(height: 20)
-                  ,new TextFormField(
+                  ),
+                  SizedBox(height: 20),
+                  new TextFormField(
+                    initialValue: widget.staffcode,
                     decoration: new InputDecoration(
-                      labelText: "Password Confirm",
+                        labelText: "Enter staff code",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                        ),
+                        prefixIcon: Icon(FontAwesomeIcons.idCard,color: this.color)
+                    ),
+                    validator: (staffcode) {
+
+                    },
+                    onSaved: (staffcode){
+                      widget.staffcode=staffcode;
+                    },
+                    keyboardType: TextInputType.number,
+
+                    style: new TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),SizedBox(height: 20),
+                new TextFormField(
+                  initialValue: widget.email,
+                  decoration: new InputDecoration(
+                      labelText: "Enter email",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
-                        prefixIcon: Icon(Icons.keyboard_hide,color: this.color)
-                    ),
-                    validator: (password2) {
-                      if(password2.length<8 || password2.isEmpty) {
-                        return "The lenghtof the Password should be greather than 8 characters or the password must match ";
-                      }
+                      prefixIcon: Icon(Icons.email,color: this.color)
+                  ),
+                    validator: (email) {
                     },
-                    onSaved: (password2){
-                      this.password2=password2;
-                    },
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                    style: new TextStyle(
-                      fontFamily: "Poppins",
-                    ),
-                  )
-
-                  ,SizedBox(height: 20),SizedBox(height: 20)
-
-                  ,SizedBox(height: 30,),Center(
+                  onSaved: (email){
+                    widget.email=email;
+                  },
+                  keyboardType: TextInputType.text,
+                  style: new TextStyle(
+                    fontFamily: "Poppins",
+                  ),
+                ),
+                  SizedBox(height: 30,),
+                  Center(
                     child:ProgressButton(
                       borderRadius: 20,
                       color: this.color,
@@ -214,7 +217,7 @@ class _SignUpState extends State<SignUp> {
                       width: 120,
                       height: 50,
                       onPressed: () async {
-                        await submit();
+                         await submit();
 // After [onPressed], it will trigger animation running backwards, from end to beginning
                         return () {
 // Optional returns is returning a function that can be called
@@ -237,27 +240,30 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  Future<http.Response> submitInfo({String staffcode,
+  String staffshort ,
+  String staffname,
+  String tocken,
+  String staffcontact,
+  String email}) async {
 
-  Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
     return http.put(
-      'http://192.168.1.7:8000/security/registration/',
+      'http://192.168.1.3:8000/management/update_technicien_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':'Token $tocken'
       },
       body: jsonEncode(<String, dynamic>{
-          "user":{
-            "username":username,
-            "email":email,
-            "password":password
-          },
-          "invitationcode":invitationcode,
-          "password2":password2
+          "staffcode": staffcode,
+          "staffshort":staffshort,
+          "staffname": staffname,
+          "staffcontact": staffcontact,
+          "email": email
         }
       ),
     );
   }
   Future<void> submit() async {
-
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       try {
@@ -265,24 +271,25 @@ class _SignUpState extends State<SignUp> {
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           print('connected');
           good_internet=true;
-          print("password : " + this.password);
-          print("email : " + this.email);
-          submitInfo(email: this.email,password: this.password,password2: this.password2,username: this.userName,invitationcode: this.invitationcode).then((onValue) async {
-            if (json.decode(onValue.body)["response"] != null){
-              wrongInfo=false;
-              wrongInfoMsg="";
-              print("token "+json.decode(onValue.body)["token"].toString());
-              Navigator.pushNamed(
-                  context, '/verify_info', arguments: {
-                "token": json.decode(onValue.body)["token"].toString()
-              });
-            }else{
+          submitInfo(tocken: widget.tocken,email: widget.email,staffcode: widget.staffcode,staffcontact: widget.staffcontact,staffname: widget.staffname,staffshort: widget.staffshort).then((onValue) async {
+            print(json.decode(onValue.body).toString());
+            if (json.decode(onValue.body).containsKey("error")){
               wrongInfo=true;
               wrongInfoMsg = json.decode(onValue.body)["error"].toString();
-              if( json.decode(onValue.body)["error"].toString()=="null"){
-                wrongInfoMsg ="there something wrong in your info ";
-              }
-              print("we have an error "+json.decode(onValue.body)["error"].toString());
+              setState(() {
+
+              });
+            }else if(json.decode(onValue.body).containsKey("staffcode")){
+              wrongInfo=false;
+              wrongInfoMsg="";
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context)
+                  => FancyBottomBarPageAdmin(token:widget.tocken ,
+                    userId: widget.userId,), ));
+            }else{
+              wrongInfo=true;
+              wrongInfoMsg = "there is something wrong";
               setState(() {
 
               });

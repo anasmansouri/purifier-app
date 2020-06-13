@@ -20,7 +20,7 @@ class _MachinesState extends State<Machines> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForClient({String name}) async {
-    String urlJson = "http://192.168.1.3:8000/management/Machines/?search=$name";
+    String urlJson = "http://192.168.1.7:8000/management/Machines/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken

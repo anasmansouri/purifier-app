@@ -19,7 +19,7 @@ class _CasesState extends State<Cases> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForClient({String name}) async {
-    String urlJson = "http://192.168.1.3:8000/management/Cases/?search=$name";
+    String urlJson = "http://192.168.1.7:8000/management/Cases/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken

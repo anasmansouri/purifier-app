@@ -28,7 +28,7 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
   TextStyle style = new TextStyle(fontSize: 20,color: color);
 
   Future<dynamic> get_client_info(String token) async {
-    print( 'http://192.168.1.3:8000/security/accounts/'+widget.userId);
+    print( 'http://192.168.1.7:8000/security/accounts/'+widget.userId);
     return http.get(
         'http://192.168.1.3:8000/security/accounts/'+widget.userId,
         headers: <String, String>{

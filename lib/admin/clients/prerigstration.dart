@@ -337,7 +337,7 @@ class _PrerigstrationState extends State<Prerigstration> {
   String address2}) async {
 
     return http.post(
-      'http://192.168.1.3:8000/security/prerigstration/',
+      'http://192.168.1.7:8000/security/prerigstration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

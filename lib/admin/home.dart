@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:purifiercompanyapp/Client/casesManagement/cases.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/admin/clients/showAll.dart';
+import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
 
 
 class FancyBottomBarPageAdmin extends StatefulWidget {
@@ -56,7 +57,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
             child:   Text("machines") /*Cases(tocken: widget.token,)*/,
           ),
           Center(
-            child: Text("techniciew")/*SettingsOnePage(token:widget.token)*/,
+            child: showAllTechnicien(tocken: widget.token,userId:widget.userId)/*SettingsOnePage(token:widget.token)*/,
           ),
           Center(
             child: Text("cases")/*SettingsOnePage(token:widget.token)*/,

@@ -5,23 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
-import 'ClientCard.dart';
+import 'CreateTechnicien.dart';
+import 'TechnicienCard.dart';
 
 
-class showAllClients extends StatefulWidget {
+class showAllTechnicien extends StatefulWidget {
   String tocken;
-  showAllClients({this.tocken});
+  String userId;
+  showAllTechnicien({this.tocken,this.userId});
   @override
-  _showAllClientsState createState() => _showAllClientsState();
+  _showAllTechnicienState createState() => _showAllTechnicienState();
 }
 
-class _showAllClientsState extends State<showAllClients> {
+class _showAllTechnicienState extends State<showAllTechnicien> {
   final TextEditingController controller = new TextEditingController();
   String research = "";
   Future<List<dynamic>> clients ;
 
-  Future<List<dynamic>> lookForClient({String indice}) async {
-    String urlJson = "http://192.168.1.7:8000/security/accounts/?search=$indice";
+  Future<List<dynamic>> lookForTechnicien({String indice}) async {
+    String urlJson = "http://192.168.1.3:8000/management/Technicians/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -32,7 +34,7 @@ class _showAllClientsState extends State<showAllClients> {
   }
   @override
   Widget build(BuildContext   context) {
-    this.clients = lookForClient(indice: research);
+    this.clients = lookForTechnicien(indice: research);
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -41,7 +43,7 @@ class _showAllClientsState extends State<showAllClients> {
           onPressed: (){
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>Prerigstration())
+                MaterialPageRoute(builder: (context) =>CreateTechnicien(tocken: widget.tocken))
             );
           },
         ),
@@ -61,7 +63,7 @@ class _showAllClientsState extends State<showAllClients> {
                 textAlignVertical:TextAlignVertical.bottom,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                  labelText: 'Enter the client info',
+                  labelText: 'Enter the technicien info',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24)
                   ),
@@ -79,13 +81,12 @@ class _showAllClientsState extends State<showAllClients> {
                       shrinkWrap: true,
                       itemCount:snapshot.data.length,
                       itemBuilder: (BuildContext ctxt, int index) =>
-                          ClientCard(tocken: widget.tocken,mobile:  snapshot.data[index]["mobile"]
-                              ,joindate:  snapshot.data[index]["joindate"],
-                              username:  snapshot.data[index]["user"]["username"]
-                          ,email:  snapshot.data[index]["user"]["email"],
-                          billingaddress1: snapshot.data[index]["billingaddress1"],
-                          billingaddress2: snapshot.data[index]["billingaddress2"],
-                          is_confirmed: snapshot.data[index]["isconfirm"],),
+                          TechnicienCard(tocken: widget.tocken,staffcode:  snapshot.data[index]["staffcode"]
+                              ,email:   snapshot.data[index]["email"],
+                            staffshort:  snapshot.data[index]["staffshort"]
+                          ,staffcontact:  snapshot.data[index]["staffcontact"],
+                          staffname: snapshot.data[index]["staffname"],
+                          userId: widget.userId,),
                     );
                   }else{
                     return SpinKitCircle(
