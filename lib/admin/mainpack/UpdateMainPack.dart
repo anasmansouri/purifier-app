@@ -18,21 +18,23 @@ import 'dart:io';
 import '../home.dart';
 
 
-class UpdateTechnicien extends StatefulWidget {
+class UpdateMainPack extends StatefulWidget {
 
   String tocken;
-  String staffcode ;
-  String staffshort ;
-  String staffname;
-  String staffcontact;
-  String email;
+  String packagecode ;
+  bool isbytime ;
+  bool isbyusage;
+  String price;
+  String exfiltermonth;
+  String exfiltervolume;
+  String packagedetail;
   String userId;
-  UpdateTechnicien({this.tocken,this.staffshort,this.staffname,this.staffcontact,this.staffcode,this.email,this.userId});
+  UpdateMainPack({this.tocken,this.exfiltervolume,this.packagecode,this.exfiltermonth,this.packagedetail,this.price,this.userId,this.isbyusage,this.isbytime});
   @override
-  _UpdateTechnicienState createState() => _UpdateTechnicienState();
+  _UpdateMainPackState createState() => _UpdateMainPackState();
 }
 
-class _UpdateTechnicienState extends State<UpdateTechnicien> {
+class _UpdateMainPackState extends State<UpdateMainPack> {
 
   final formKey = GlobalKey<FormState>();
 
@@ -76,101 +78,99 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
                   SizedBox(height: 30,),
                   Center(
                    child :  Icon(
-                        Icons.perm_identity,
+                        Icons.inbox,
                         color: this.color,
                         size: 130.0,
                       ),
                     //IconTheme
                   ),Center(child: Alert()),
                   SizedBox(height: 60,),
-                new TextFormField(
-                  initialValue: widget.staffname,
-                decoration: new InputDecoration(
-                labelText: "Enter staffname",
-            fillColor: Colors.white,
-                border: new OutlineInputBorder(
-                borderRadius: new BorderRadius.circular(25.0),
-          ),
-            prefixIcon: Icon(Icons.contacts,color: this.color)
-        ),
-        // ignore: missing_return
-        validator: (username) {
-          if((username==null)||(username.isEmpty)) {
-            return "Please Enter staffname ";
-          }
-        },
-        onSaved: (staffname){
-          widget.staffname=staffname;
-        },
-        keyboardType: TextInputType.text,
-        style: new TextStyle(
-          fontFamily: "Poppins",
-        ),
-      ),
                   SizedBox(height: 20),
                   new TextFormField(
-                    initialValue: widget.staffcontact,
+                    initialValue: widget.price,
                     decoration: new InputDecoration(
-                        labelText: "Enter staffcontact ",
+                        labelText: "Enter price ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.contacts,color: this.color)
+                        prefixIcon: Icon(FontAwesomeIcons.moneyBill,color: this.color)
                     ),
                     // ignore: missing_return
-                    validator: (staffcontact) {
-                      if((staffcontact==null)||(staffcontact.isEmpty)) {
-                        return "Please Enter staffcontact";
+                    validator: (price) {
+                      if((price==null)||(price.isEmpty)) {
+                        return "Please Enter price";
                       }
                     },
-                    onSaved: (staffcontact){
-                     widget.staffcontact=staffcontact;
+                    onSaved: (price){
+                     widget.price=price;
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
                   ),SizedBox(height: 20),
                   new TextFormField(
-                    initialValue: widget.staffshort,
+                    initialValue: widget.exfiltermonth,
                     decoration: new InputDecoration(
-                        labelText: "Enter staffshort ",
+                        labelText: "Enter exfiltermonth ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.contacts,color: this.color)
+                        prefixIcon: Icon(FontAwesomeIcons.hourglassHalf,color: this.color)
                     ),
                     // ignore: missing_return
-                    validator: (staffshort) {
-                      if((staffshort==null)||(staffshort.isEmpty)) {
-                        return "Please Enter a invitation code ";
+                    validator: (exfiltermonth) {
+                      if((exfiltermonth==null)||(exfiltermonth.isEmpty)) {
+                        return "Please Enter a exfiltermonth";
                       }
                     },
-                    onSaved: (staffshort){
-                      widget.staffshort=staffshort;
+                    onSaved: (exfiltermonth){
+                      widget.exfiltermonth=exfiltermonth;
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
                   ),
                   SizedBox(height: 20),
+                  new TextFormField(
+                    initialValue: widget.exfiltervolume,
+                    decoration: new InputDecoration(
+                        labelText: "Enter exfiltervolume",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                        ),
+                        prefixIcon: Icon(FontAwesomeIcons.prescriptionBottle,color: this.color)
+                    ),
+                    validator: (exfiltervolume) {
+
+                    },
+                    onSaved: (exfiltervolume){
+                      widget.exfiltervolume=exfiltervolume;
+                    },
+                    keyboardType: TextInputType.number,
+
+                    style: new TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),SizedBox(height: 20),
                 new TextFormField(
-                  initialValue: widget.email,
+                  initialValue: widget.packagedetail,
                   decoration: new InputDecoration(
-                      labelText: "Enter email",
+                      labelText: "Enter packagedetail",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
-                      prefixIcon: Icon(Icons.email,color: this.color)
+                      prefixIcon: Icon(FontAwesomeIcons.info,color: this.color)
                   ),
-                    validator: (email) {
+                    validator: (packagedetail) {
                     },
-                  onSaved: (email){
-                    widget.email=email;
+                  onSaved: (packagedetail){
+                    widget.packagedetail=packagedetail;
                   },
                   keyboardType: TextInputType.text,
                   style: new TextStyle(
@@ -218,25 +218,26 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
     );
   }
 
-  Future<http.Response> submitInfo({String staffcode,
-  String staffshort ,
-  String staffname,
+  Future<http.Response> submitInfo({String packagecode,
+  String price,
   String tocken,
-  String staffcontact,
-  String email}) async {
+  String packagedetail,
+  String email,
+  String exfiltervolume,
+  String exfiltermonth}) async {
 
     return http.put(
-      'http://192.168.1.3:8000/management/update_technicien_info/',
+      'http://192.168.1.3:8000/management/update_main_pack_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'
       },
       body: jsonEncode(<String, dynamic>{
-          "staffcode": staffcode,
-          "staffshort":staffshort,
-          "staffname": staffname,
-          "staffcontact": staffcontact,
-          "email": email
+          "packagecode": packagecode,
+          "packagedetail":packagedetail,
+          "price": price,
+          "exfiltervolume": exfiltervolume,
+          "exfiltermonth": exfiltermonth
         }
       ),
     );
@@ -249,7 +250,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           print('connected');
           good_internet=true;
-          submitInfo(tocken: widget.tocken,email: widget.email,staffcode: widget.staffcode,staffcontact: widget.staffcontact,staffname: widget.staffname,staffshort: widget.staffshort).then((onValue) async {
+          submitInfo(tocken: widget.tocken,packagecode:  widget.packagecode,price: widget.price,packagedetail: widget.packagedetail,exfiltervolume: widget.exfiltervolume,exfiltermonth: widget.exfiltermonth).then((onValue) async {
             print(json.decode(onValue.body).toString());
             if (json.decode(onValue.body).containsKey("error")){
               wrongInfo=true;
@@ -257,7 +258,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
               setState(() {
 
               });
-            }else if(json.decode(onValue.body).containsKey("staffcode")){
+            }else if(json.decode(onValue.body).containsKey("packagecode")){
               wrongInfo=false;
               wrongInfoMsg="";
               Navigator.pushReplacement(

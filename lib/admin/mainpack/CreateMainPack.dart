@@ -1,41 +1,46 @@
 import 'dart:convert';
-
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
+import 'package:purifiercompanyapp/Animations/animation.dart';
+import 'package:purifiercompanyapp/Authentification/verify_info.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
+// to test if it is an email
+import 'package:email_validator/email_validator.dart';
 
 //test json
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
-import '../home.dart';
 
-
-class UpdateTechnicien extends StatefulWidget {
+class CreateMainPack extends StatefulWidget {
 
   String tocken;
-  String staffcode ;
-  String staffshort ;
-  String staffname;
-  String staffcontact;
-  String email;
-  String userId;
-  UpdateTechnicien({this.tocken,this.staffshort,this.staffname,this.staffcontact,this.staffcode,this.email,this.userId});
+  CreateMainPack({this.tocken});
   @override
-  _UpdateTechnicienState createState() => _UpdateTechnicienState();
+  _CreateMainPackState createState() => _CreateMainPackState();
 }
 
-class _UpdateTechnicienState extends State<UpdateTechnicien> {
+class _CreateMainPackState extends State<CreateMainPack> {
 
   final formKey = GlobalKey<FormState>();
 
+  String packagecode ;
+  bool isbytime ;
+  bool isbyusage;
+  String price;
+  String exfiltermonth;
+  String exfiltervolume;
+  String packagedetail;
 
   Color color = Colors.blue;
 
@@ -76,7 +81,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
                   SizedBox(height: 30,),
                   Center(
                    child :  Icon(
-                        Icons.perm_identity,
+                        Icons.inbox,
                         color: this.color,
                         size: 130.0,
                       ),
@@ -84,23 +89,22 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
                   ),Center(child: Alert()),
                   SizedBox(height: 60,),
                 new TextFormField(
-                  initialValue: widget.staffname,
                 decoration: new InputDecoration(
-                labelText: "Enter staffname",
+                labelText: "Enter packagecode",
             fillColor: Colors.white,
                 border: new OutlineInputBorder(
                 borderRadius: new BorderRadius.circular(25.0),
           ),
-            prefixIcon: Icon(Icons.contacts,color: this.color)
+            prefixIcon: Icon(FontAwesomeIcons.idCard,color: this.color)
         ),
         // ignore: missing_return
-        validator: (username) {
-          if((username==null)||(username.isEmpty)) {
-            return "Please Enter staffname ";
+        validator: (packagecode) {
+          if((packagecode==null)||(packagecode.isEmpty)) {
+            return "Please Enter packagecode ";
           }
         },
-        onSaved: (staffname){
-          widget.staffname=staffname;
+        onSaved: (packagecode){
+          this.packagecode=packagecode;
         },
         keyboardType: TextInputType.text,
         style: new TextStyle(
@@ -109,68 +113,88 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
       ),
                   SizedBox(height: 20),
                   new TextFormField(
-                    initialValue: widget.staffcontact,
                     decoration: new InputDecoration(
-                        labelText: "Enter staffcontact ",
+                        labelText: "Enter price ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.contacts,color: this.color)
+                        prefixIcon: Icon(FontAwesomeIcons.moneyBill,color: this.color)
                     ),
                     // ignore: missing_return
-                    validator: (staffcontact) {
-                      if((staffcontact==null)||(staffcontact.isEmpty)) {
-                        return "Please Enter staffcontact";
+                    validator: (price) {
+                      if((price==null)||(price.isEmpty)) {
+                        return "Please Enter price";
                       }
                     },
-                    onSaved: (staffcontact){
-                     widget.staffcontact=staffcontact;
+                    onSaved: (price){
+                      this.price=price;
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
                   ),SizedBox(height: 20),
                   new TextFormField(
-                    initialValue: widget.staffshort,
                     decoration: new InputDecoration(
-                        labelText: "Enter staffshort ",
+                        labelText: "Enter exfiltermonth ",
                         fillColor: Colors.white,
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(25.0),
                         ),
-                        prefixIcon: Icon(Icons.contacts,color: this.color)
+                        prefixIcon: Icon(FontAwesomeIcons.hourglassHalf,color: this.color)
                     ),
                     // ignore: missing_return
-                    validator: (staffshort) {
-                      if((staffshort==null)||(staffshort.isEmpty)) {
-                        return "Please Enter a invitation code ";
+                    validator: (exfiltermonth) {
+                      if((exfiltermonth==null)||(exfiltermonth.isEmpty)) {
+                        return "Please Enter a exfiltermonth";
                       }
                     },
-                    onSaved: (staffshort){
-                      widget.staffshort=staffshort;
+                    onSaved: (exfiltermonth){
+                      this.exfiltermonth=exfiltermonth;
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
                   ),
                   SizedBox(height: 20),
+                  new TextFormField(
+                    decoration: new InputDecoration(
+                        labelText: "Enter exfiltervolume",
+                        fillColor: Colors.white,
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                        ),
+                        prefixIcon: Icon(FontAwesomeIcons.prescriptionBottle,color: this.color)
+                    ),
+                    validator: (exfiltervolume) {
+                      if((exfiltervolume==null)||(exfiltervolume.isEmpty)) {
+                        return "Please Enter a exfiltervolume";
+                      }
+                    },
+                    onSaved: (exfiltervolume){
+                      this.exfiltervolume=exfiltervolume;
+                    },
+                    keyboardType: TextInputType.number,
+
+                    style: new TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),SizedBox(height: 20),
                 new TextFormField(
-                  initialValue: widget.email,
                   decoration: new InputDecoration(
-                      labelText: "Enter email",
+                      labelText: "Enter packagedetail",
                       fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
-                      prefixIcon: Icon(Icons.email,color: this.color)
+                      prefixIcon: Icon(FontAwesomeIcons.info,color: this.color)
                   ),
-                    validator: (email) {
+                    validator: (packagedetail) {
                     },
-                  onSaved: (email){
-                    widget.email=email;
+                  onSaved: (packagedetail){
+                    this.packagedetail=packagedetail;
                   },
                   keyboardType: TextInputType.text,
                   style: new TextStyle(
@@ -218,25 +242,27 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
     );
   }
 
-  Future<http.Response> submitInfo({String staffcode,
-  String staffshort ,
-  String staffname,
-  String tocken,
-  String staffcontact,
-  String email}) async {
+  Future<http.Response> submitInfo({
+    String packagecode ,
+    String price,
+    String exfiltermonth,
+    String exfiltervolume,
+    String packagedetail,
+    String tocken
+  }) async {
 
-    return http.put(
-      'http://192.168.1.3:8000/management/update_technicien_info/',
+    return http.post(
+      'http://192.168.1.3:8000/management/MainPacks/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'
       },
       body: jsonEncode(<String, dynamic>{
-          "staffcode": staffcode,
-          "staffshort":staffshort,
-          "staffname": staffname,
-          "staffcontact": staffcontact,
-          "email": email
+          "packagecode": packagecode,
+          "price":price,
+          "exfiltermonth": exfiltermonth,
+          "exfiltervolume": exfiltervolume,
+          "packagedetail": packagedetail
         }
       ),
     );
@@ -249,7 +275,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           print('connected');
           good_internet=true;
-          submitInfo(tocken: widget.tocken,email: widget.email,staffcode: widget.staffcode,staffcontact: widget.staffcontact,staffname: widget.staffname,staffshort: widget.staffshort).then((onValue) async {
+          submitInfo(tocken: widget.tocken,price: this.price,packagedetail: this.packagedetail,exfiltermonth: this.exfiltermonth,packagecode: this.packagecode,exfiltervolume:  this.exfiltervolume).then((onValue) async {
             print(json.decode(onValue.body).toString());
             if (json.decode(onValue.body).containsKey("error")){
               wrongInfo=true;
@@ -257,14 +283,10 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
               setState(() {
 
               });
-            }else if(json.decode(onValue.body).containsKey("staffcode")){
+            }else if(json.decode(onValue.body).containsKey("packagecode")){
               wrongInfo=false;
               wrongInfoMsg="";
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context)
-                  => FancyBottomBarPageAdmin(token:widget.tocken ,
-                    userId: widget.userId,), ));
+              Navigator.pop(context,true);
             }else{
               wrongInfo=true;
               wrongInfoMsg = "there is something wrong";

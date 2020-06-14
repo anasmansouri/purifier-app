@@ -13,6 +13,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/admin/clients/showAll.dart';
 import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
 
+import 'mainpack/showAllMainPacks.dart';
+
 
 class FancyBottomBarPageAdmin extends StatefulWidget {
   // static final String path = "lib/src/pages/misc/navybar.dart";
@@ -51,7 +53,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
             child:    showAllClients(tocken: widget.token,)/*Machines(tocken: widget.token,)*/,
           ),
           Center(
-             child: Text("Main pack") /*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
+             child: showAllMainPacks(tocken: widget.token,userId: widget.userId,)/*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
           ),
           Center(
             child:   Text("machines") /*Cases(tocken: widget.token,)*/,
