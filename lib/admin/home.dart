@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/admin/clients/showAll.dart';
 import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
 
+import 'filters/showAllFilters.dart';
 import 'mainpack/showAllMainPacks.dart';
 
 
@@ -65,7 +66,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
             child: Text("cases")/*SettingsOnePage(token:widget.token)*/,
           ),
           Center(
-            child: Text("filter")/*SettingsOnePage(token:widget.token)*/,
+            child: showAllFilters(userId: widget.userId,tocken: widget.token,)/*SettingsOnePage(token:widget.token)*/,
           ),
         ],
       ),
