@@ -226,7 +226,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
   String email}) async {
 
     return http.put(
-      'http://192.168.1.3:8000/management/update_technicien_info/',
+      'http://anasmansouri.ddns.net:8000/management/update_technicien_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

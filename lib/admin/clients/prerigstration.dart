@@ -1,26 +1,12 @@
 import 'dart:convert';
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
-import 'package:purifiercompanyapp/Animations/animation.dart';
-import 'package:purifiercompanyapp/Authentification/verify_info.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-
-// to test if it is an email
-import 'package:email_validator/email_validator.dart';
-
-//test json
-
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'dart:io';
-
 
 class Prerigstration extends StatefulWidget {
   @override
@@ -335,9 +321,8 @@ class _PrerigstrationState extends State<Prerigstration> {
 
   Future<http.Response> submitInfo({String username,String invitationcode,String contactName,String mobile,String contactno,String comment,String source,String address1,
   String address2}) async {
-
     return http.post(
-      'http://192.168.1.7:8000/security/prerigstration/',
+      'http://anasmansouri.ddns.net:8000/security/prerigstration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -358,7 +343,6 @@ class _PrerigstrationState extends State<Prerigstration> {
     );
   }
   Future<void> submit() async {
-
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       try {

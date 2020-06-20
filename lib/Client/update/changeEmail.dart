@@ -166,7 +166,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://192.168.1.7:8000/security/update_email_address/',
+      'http://anasmansouri.ddns.net:8000/security/update_email_address/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token '+token

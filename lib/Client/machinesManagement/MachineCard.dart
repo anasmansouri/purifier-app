@@ -63,7 +63,7 @@ class _MachineCardState extends State<MachineCard> {
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.tools,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.nextservicedate,style: styleData,)
+                    Text(widget.nextservicedate?? "",style: styleData,)
                   ],
                 )
               ],

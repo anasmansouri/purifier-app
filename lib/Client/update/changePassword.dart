@@ -169,7 +169,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://192.168.1.7:8000/security/update_password/',
+      'http://anasmansouri.ddns.net:8000/security/update_password/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'

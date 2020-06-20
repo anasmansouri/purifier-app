@@ -85,9 +85,7 @@ class _MachineDetailsState extends State<MachineDetails> {
             ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-
                   children: <Widget>[Flexible(child:FlatButton.icon(
-
                     icon: Icon(
                       FontAwesomeIcons.mapMarkerAlt, color: color,
                     ),

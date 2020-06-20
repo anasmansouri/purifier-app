@@ -25,7 +25,7 @@ class _showAllFiltersState extends State<showAllFilters> {
   Future<List<dynamic>> filters ;
 
   Future<List<dynamic>> lookForFilters({String indice}) async {
-    String urlJson = "http://192.168.1.3:8000/management/Filters/?search=$indice";
+    String urlJson = "http://anasmansouri.ddns.net:8000/management/Filters/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken

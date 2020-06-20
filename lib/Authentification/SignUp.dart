@@ -240,7 +240,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
     return http.put(
-      'http://192.168.1.7:8000/security/registration/',
+      'http://anasmansouri.ddns.net:8000/security/registration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

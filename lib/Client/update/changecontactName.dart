@@ -144,7 +144,7 @@ class _ChangecontactNameState extends State<ChangecontactName> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://192.168.1.7:8000/security/update_contact_name/',
+      'http://anasmansouri.ddns.net:8000/security/update_contact_name/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'

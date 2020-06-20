@@ -245,7 +245,7 @@ class _CreateTechnicienState extends State<CreateTechnicien> {
   String email}) async {
 
     return http.post(
-      'http://192.168.1.3:8000/management/Technicians/',
+      'http://anasmansouri.ddns.net:8000/management/Technicians/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

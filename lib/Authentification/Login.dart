@@ -6,7 +6,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:location/location.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:purifiercompanyapp/Animations/animation.dart';
 import 'package:purifiercompanyapp/Client/home.dart';
@@ -191,7 +190,7 @@ class _LoginState extends State<Login> {
 
   Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
-      'http://192.168.1.3:8000/security/api-token-auth/',
+      'http://anasmansouri.ddns.net:8000/security/api-token-auth/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

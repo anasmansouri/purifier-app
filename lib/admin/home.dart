@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:purifiercompanyapp/Client/casesManagement/cases.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/admin/clients/showAll.dart';
+import 'package:purifiercompanyapp/admin/machines/showAllMachines.dart';
 import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
 
 import 'filters/showAllFilters.dart';
@@ -57,7 +58,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
              child: showAllMainPacks(tocken: widget.token,userId: widget.userId,)/*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
           ),
           Center(
-            child:   Text("machines") /*Cases(tocken: widget.token,)*/,
+            child:   showAllMachines(tocken: widget.token,userId: widget.userId,) /*Cases(tocken: widget.token,)*/,
           ),
           Center(
             child: showAllTechnicien(tocken: widget.token,userId:widget.userId)/*SettingsOnePage(token:widget.token)*/,

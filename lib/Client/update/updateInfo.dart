@@ -192,7 +192,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://192.168.1.7:8000/security/logout/',
+      'http://anasmansouri.ddns.net:8000/security/logout/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token '+widget.token

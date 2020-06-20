@@ -203,7 +203,7 @@ class _UpdateFilterState extends State<UpdateFilter> {
   }) async {
 
     return http.put(
-      'http://192.168.1.3:8000/management/update_filter_info/',
+      'http://anasmansouri.ddns.net:8000/management/update_filter_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'
