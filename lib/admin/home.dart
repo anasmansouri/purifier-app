@@ -14,6 +14,7 @@ import 'package:purifiercompanyapp/admin/clients/showAll.dart';
 import 'package:purifiercompanyapp/admin/machines/showAllMachines.dart';
 import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
 
+import 'cases/showAllCases.dart';
 import 'filters/showAllFilters.dart';
 import 'mainpack/showAllMainPacks.dart';
 
@@ -64,7 +65,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
             child: showAllTechnicien(tocken: widget.token,userId:widget.userId)/*SettingsOnePage(token:widget.token)*/,
           ),
           Center(
-            child: Text("cases")/*SettingsOnePage(token:widget.token)*/,
+            child: showAllCases(userId: widget.userId,tocken: widget.token,)/*SettingsOnePage(token:widget.token)*/,
           ),
           Center(
             child: showAllFilters(userId: widget.userId,tocken: widget.token,)/*SettingsOnePage(token:widget.token)*/,

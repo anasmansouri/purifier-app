@@ -9,6 +9,7 @@ import 'package:purifiercompanyapp/admin/filters/CreateFilter.dart';
 import 'package:purifiercompanyapp/admin/filters/FilterCard.dart';
 import 'package:purifiercompanyapp/admin/machines/CreateMachine.dart';
 import 'package:purifiercompanyapp/admin/mainpack/CreateMainPack.dart';
+import 'package:toast/toast.dart';
 import 'dart:io';
 
 import 'MachineCard.dart';
@@ -148,11 +149,16 @@ class _showAllMachinesState extends State<showAllMachines> {
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: () async{
           await get_client_name_id();
-
-           Navigator.push(
+          if (this.main_packs.isEmpty){
+            Toast.show("there is no main pack in the data base !", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+          }else if (this.user_names.isEmpty){
+            Toast.show("there is no client in the data base !", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+          }else{
+            Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>CreateMachine(tocken: widget.tocken,user_names: this.user_names,main_packs: this.main_packs,))
             );
+          }
           },
         ),
         body: Column(

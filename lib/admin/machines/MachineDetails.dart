@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/admin/filters/UpdateFilter.dart';
+import 'package:purifiercompanyapp/admin/machines/UpdateMachine.dart';
 import 'package:purifiercompanyapp/admin/technicien/UpdateTechnicien.dart';
 class MachineDetails extends StatefulWidget {
 
@@ -171,12 +172,12 @@ class _MachineDetailsState extends State<MachineDetails> {
                               width: 120,
                               height: 50,
                               onPressed: () async {
-                               /* Navigator.push(
+                                Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) =>UpdateFilter(tocken: widget.tocken,filterdetail: widget.filterdetail,
-                                    filtername:  widget.filtername,filtercode: widget.filtercode,price:  widget.price,
-                                    userId:widget.userId))
-                                ); */
+                                    MaterialPageRoute(builder: (context) =>UpdateMachine(tocken: widget.tocken,installaddress1:  widget.installaddress1,
+                                    machineid:   widget.machineid,nextservicedate:  widget.nextservicedate,installaddress2:   widget.installaddress2,
+                                    userId:widget.userId,))
+                                );
 // After [onPressed], it will trigger animation running backwards, from end to beginning
                                 return () {
 // Optional returns is returning a function that can be called
