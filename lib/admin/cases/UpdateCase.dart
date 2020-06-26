@@ -181,6 +181,7 @@ class _UpdateCaseState extends State<UpdateCase> {
                         style: TextStyle(color: color),
                         onChanged: (String newValue) {
                           setState(() {
+                            
                             widget.iscompleted = (newValue=="true")? true:false;
                           });
                         },

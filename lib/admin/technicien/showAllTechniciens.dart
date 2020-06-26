@@ -20,7 +20,7 @@ class showAllTechnicien extends StatefulWidget {
 class _showAllTechnicienState extends State<showAllTechnicien> {
   final TextEditingController controller = new TextEditingController();
   String research = "";
-  Future<List<dynamic>> clients ;
+  Future<List<dynamic>> tech ;
 
   Future<List<dynamic>> lookForTechnicien({String indice}) async {
     String urlJson = "http://anasmansouri.ddns.net:8000/management/Technicians/?search=$indice";
@@ -34,10 +34,11 @@ class _showAllTechnicienState extends State<showAllTechnicien> {
   }
   @override
   Widget build(BuildContext   context) {
-    this.clients = lookForTechnicien(indice: research);
+    this.tech = lookForTechnicien(indice: research);
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "technicien",
         backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: (){
@@ -73,7 +74,7 @@ class _showAllTechnicienState extends State<showAllTechnicien> {
             ),SizedBox(height: 5,),
             Expanded(
               child: FutureBuilder(
-                future: this.clients,
+                future: this.tech,
                 builder: (context,snapshot){
                   if(snapshot.connectionState==ConnectionState.done){
                     // print(snapshot.data.toString());

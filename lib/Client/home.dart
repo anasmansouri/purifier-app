@@ -53,7 +53,7 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
             child: Cases(tocken: widget.token,),
           ),
           Center(
-            child: SettingsOnePage(token:widget.token),
+            child: SettingsOnePage(token:widget.token,userId: widget.userId,),
           ),
         ],
       ),
@@ -71,7 +71,7 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
                     icon: Icon(Icons.person), title: Text('User')),
 
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.menu), title: Text('details')),
+                    icon: Icon(Icons.menu), title: Text('cases')),
                 FancyBottomNavigationItem(
                     icon: Icon(Icons.settings), title: Text('Settings')),
               ],

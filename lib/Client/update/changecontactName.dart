@@ -46,6 +46,7 @@ class _ChangecontactNameState extends State<ChangecontactName> {
     data=ModalRoute.of(context).settings.arguments;
     token =data["token"].toString();
     // token ='e6d5f02d4e504682a8914469f65ff5153209a637';
+    print(data["userId"]);
 
     var height = MediaQuery
         .of(context)
@@ -91,6 +92,9 @@ class _ChangecontactNameState extends State<ChangecontactName> {
                   new_contact_name = input;
                 },
                 validator: (input) {
+                  if (input.isEmpty) {
+                    return "the contact name can't be empty";
+                  }
 
                 },
                 decoration: InputDecoration(

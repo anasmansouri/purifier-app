@@ -273,7 +273,7 @@ class _SignUpState extends State<SignUp> {
               wrongInfoMsg="";
               print("token "+json.decode(onValue.body)["token"].toString());
               Navigator.pushNamed(
-                  context, '/verify_info', arguments: {
+                  context, '/verify_email_2', arguments: {
                 "token": json.decode(onValue.body)["token"].toString()
               });
             }else{

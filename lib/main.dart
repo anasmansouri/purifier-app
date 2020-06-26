@@ -19,8 +19,6 @@ void main() async {
       routes: {
         '/Login' :(context) => Login(),
         '/SignUp' :(context)=>SignUp(),
-        // '/personalInfo' :(context) => Profile_Client(),
-        '/verify_info':(context)=>Verify_email(),
         '/forgotPassword':(context)=>ForgotPassword(),
         // working on home
         '/home':(context)=>FancyBottomBarPage(),

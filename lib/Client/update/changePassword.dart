@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:purifiercompanyapp/Authentification/Login.dart';
 import 'package:toast/toast.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -10,6 +11,10 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 
 class ChangePassword extends StatefulWidget {
+
+  String tocken;
+  String userId;
+  ChangePassword({this.tocken,this.userId});
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
 }
@@ -24,6 +29,8 @@ class _ChangePasswordState extends State<ChangePassword> {
   bool good_internet= true;
   String wrongInfoMsg="";
   Color color =Colors.blue;
+
+
 
   Map data={};
   final formKey = GlobalKey<FormState>();
@@ -46,8 +53,8 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
   @override
   Widget build(BuildContext context) {
-    data=ModalRoute.of(context).settings.arguments;
-    token =data["token"].toString();
+    // data=ModalRoute.of(context).settings.arguments;
+    token =widget.tocken;
     // token ='e6d5f02d4e504682a8914469f65ff5153209a637';
 
     var height = MediaQuery
@@ -196,7 +203,8 @@ class _ChangePasswordState extends State<ChangePassword> {
               wrongInfoMsg="";
               Toast.show(json.decode(onValue.body)["response"], context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
               print(json.decode(onValue.body)["response"]);
-              Navigator.pushNamed(context, '/Login');
+              Route route = MaterialPageRoute(builder: (context) => Login());
+              Navigator.pushAndRemoveUntil(context,route,(Route<dynamic> route)=> false);
             }else{
               wrongInfo=true;
               wrongInfoMsg = json.decode(onValue.body)["error"].toString();

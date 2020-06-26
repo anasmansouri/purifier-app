@@ -36,6 +36,7 @@ class _showAllClientsState extends State<showAllClients> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "client",
         backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: (){

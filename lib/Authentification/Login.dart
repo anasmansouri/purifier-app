@@ -144,7 +144,7 @@ class _LoginState extends State<Login> {
                             InkWell(
                               onTap: () {
                                 // Sign up
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushNamed(
                                     context, '/SignUp');
                               },
                               child: Text(
@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 // forget password
 
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushNamed(
                                     context, '/forgotPassword');
 
                               },

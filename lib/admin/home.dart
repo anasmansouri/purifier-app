@@ -18,6 +18,12 @@ import 'cases/showAllCases.dart';
 import 'filters/showAllFilters.dart';
 import 'mainpack/showAllMainPacks.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 
 class FancyBottomBarPageAdmin extends StatefulWidget {
   // static final String path = "lib/src/pages/misc/navybar.dart";
@@ -38,13 +44,106 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
   PageController pageController = PageController(initialPage: 0);
   StreamController<int> indexcontroller = StreamController<int>.broadcast();
   int index = 0;
+
+  //
+
+  bool wrongInfo =false;
+  bool good_internet= true;
+  String wrongInfoMsg="";
+
+  Widget Alert(){
+    if(!good_internet){
+      return Text("no internet connexion ",style: TextStyle(
+          color: Colors.red,
+          fontSize: 15
+      ),);
+    }else if(wrongInfo){
+      return Text(wrongInfoMsg,style: TextStyle(
+          color: Colors.red,
+          fontSize: 15
+      ),);
+    }else{
+      return SizedBox(height: 0,width: 0,);
+    }
+  }
+
+
+
+  Future<http.Response> submitInfo() async {
+    return http.post(
+      'http://anasmansouri.ddns.net:8000/security/logout/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':'token '+widget.token
+      },
+      body: jsonEncode(<String, String>{
+      }),
+    );
+  }
+
+  Future<void> submit() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+        good_internet=true;
+
+        submitInfo().then((onValue){
+          if (json.decode(onValue.body)["response"] != null){
+            wrongInfo=false;
+            wrongInfoMsg="";
+            Toast.show(json.decode(onValue.body)["response"], context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+            print(json.decode(onValue.body)["response"]);
+            Navigator.pushReplacementNamed(
+                context, '/Login', arguments: {
+              "token": widget.token
+            });
+          }else{
+            wrongInfo=true;
+            wrongInfoMsg = json.decode(onValue.body)["error"].toString();
+            if( json.decode(onValue.body)["error"].toString()=="null"){
+              wrongInfoMsg ="there something wrong in your code";
+            }
+            print("we have an error"+json.decode(onValue.body)["error"].toString());
+            setState(() {
+
+            });
+          }
+        });
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      setState(() {
+        good_internet= false;
+      });
+    }
+
+  }
+
+
+
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Colors.grey.shade200,
       appBar: AppBar(
-        title: Text("osmosis")
-      ),
+          title: Text("osmosis"),
+          actions: <Widget>[
+          Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () async{
+                        await submit();
+                      },
+                      child: Icon(
+                        FontAwesomeIcons.signOutAlt,
+                        size: 26.0,
+                      ),
+                    )
+                ),
+        ],
+          ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
@@ -53,13 +152,13 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
         controller: pageController,
         children: <Widget>[
           Center(
-            child:    showAllClients(tocken: widget.token,)/*Machines(tocken: widget.token,)*/,
+            child:    showAllClients(tocken: widget.token,),
           ),
           Center(
-             child: showAllMainPacks(tocken: widget.token,userId: widget.userId,)/*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
+            child: showAllMainPacks(tocken: widget.token,userId: widget.userId,)/*ClientInfoDetails(tocken:widget.token ,userId: widget.userId,)*/,
           ),
           Center(
-            child:   showAllMachines(tocken: widget.token,userId: widget.userId,) /*Cases(tocken: widget.token,)*/,
+            child: showAllMachines(tocken: widget.token,userId: widget.userId,) /*Cases(tocken: widget.token,)*/,
           ),
           Center(
             child: showAllTechnicien(tocken: widget.token,userId:widget.userId)/*SettingsOnePage(token:widget.token)*/,

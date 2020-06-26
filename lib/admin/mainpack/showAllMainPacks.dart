@@ -38,6 +38,7 @@ class _showAllMainPacksState extends State<showAllMainPacks> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "main_packs",
         backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: (){

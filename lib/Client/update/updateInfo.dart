@@ -90,12 +90,8 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                           title: Text("Change Password"),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
-                            //open change password
-                            Navigator.pushNamed(
-                                context, '/updatePassword', arguments: {
-                              "token": widget.token,
-                              "userId":widget.userId
-                            });
+                            Route route = MaterialPageRoute(builder: (context) => ChangePassword(tocken: widget.token,userId:  widget.userId,));
+                            Navigator.push(context, route);
                           },
                         ),
                         _buildDivider(),
@@ -121,7 +117,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                             FontAwesomeIcons.idCard,
                             color: Colors.blue,
                           ),
-                          title: Text("Change username"),
+                          title: Text("Change contact name"),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             //open change location
@@ -215,7 +211,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
               wrongInfoMsg="";
               Toast.show(json.decode(onValue.body)["response"], context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
               print(json.decode(onValue.body)["response"]);
-              Navigator.pushNamed(
+              Navigator.pushReplacementNamed(
                   context, '/Login', arguments: {
                 "token": widget.token
               });

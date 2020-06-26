@@ -439,12 +439,6 @@ class _CreateCaseState extends State<CreateCase> {
             setState(() {
 
             });
-          }else if(this.filter_choosen.isEmpty){
-            wrongInfoMsg = "please choose a filter";
-            wrongInfo=true;
-            setState(() {
-
-            });
           }else{
 
           submitInfo(tocken: widget.tocken,comment: this.comment,action: this.action,caseType: this.caseType,filter_choosen: this.filter_choosen,

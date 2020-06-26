@@ -8,6 +8,9 @@ import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+
+import 'Login.dart';
 
 
 
@@ -28,12 +31,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Widget Alert(){
     if(!good_internet){
-      return Text("no internet connexion ",style: TextStyle(
+      return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
       ),);
     }else if(wrongInfo){
-      return Text(wrongInfoMsg,style: TextStyle(
+      return Text(wrongInfoMsg,textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
       ),);
@@ -63,6 +66,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   color: this.color,
                   fontSize: 30
               )),SizedBox(height: height/10,),
+              Center(child: Alert()),
+              SizedBox(height: 20,),
               TextFormField(
                 onSaved: (input) {
                   this.invitationcode = input;
@@ -162,9 +167,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           print("username : " + this.username);
           submitInfo(this.username, this.invitationcode).then((onValue){
             if (json.decode(onValue.body)["response"] != null){
-              print("response "+json.decode(onValue.body)["response"].toString());
-              Navigator.pushNamed(
-                  context, '/Login');
+              Toast.show(json.decode(onValue.body)["response"], context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+              Route route = MaterialPageRoute(builder: (context) => Login());
+              Navigator.pushAndRemoveUntil(context,route,(Route<dynamic> route)=> false);
             }else{
               wrongInfo=true;
               wrongInfoMsg=json.decode(onValue.body)["error"].toString();
@@ -181,22 +186,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           good_internet= false;
         });
       }
-      /*  submitInfo(this.email, this.password).then((onValue){
-        if(onValue){
-          wrongInfo = false;
-          if(Client){
-            Navigator.push(context, SlideRightRoute(page: PersonalInformations(email: this.email)));
-          }else{
-            Navigator.push(context, SlideRightRoute(page: Home()));
-          }
-          print("client $Client");
-        }else{
-          print("client $Client");
-          setState(() {
-            wrongInfo = true;
-          });
-        }
-      });  */
     }
   }
 

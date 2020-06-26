@@ -39,7 +39,7 @@ class _TechnicienDetailsState extends State<TechnicienDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                               SizedBox(height: 50,),
-                              Icon(Icons.perm_identity, size: 130, color: color,),
+                              Icon(FontAwesomeIcons.userCog, size: 130, color: color,),
                               SizedBox(height: 50),
                               SizedBox(height: 20,),
                               Row(

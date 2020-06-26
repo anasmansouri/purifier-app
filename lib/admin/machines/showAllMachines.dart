@@ -27,7 +27,7 @@ class showAllMachines extends StatefulWidget {
 class _showAllMachinesState extends State<showAllMachines> {
   final TextEditingController controller = new TextEditingController();
   String research = "";
-  Future<List<dynamic>> filters ;
+  Future<List<dynamic>> machines ;
   bool good_internet= true;
   bool wrongInfo= false;
   String wrongInfoMsg =" ";
@@ -141,10 +141,11 @@ class _showAllMachinesState extends State<showAllMachines> {
 
   @override
   Widget build(BuildContext   context) {
-    this.filters = lookForMachines(indice: research);
+    this.machines = lookForMachines(indice: research);
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "machines",
         backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: () async{
@@ -187,7 +188,7 @@ class _showAllMachinesState extends State<showAllMachines> {
             ),SizedBox(height: 5,),
             Expanded(
               child: FutureBuilder(
-                future: this.filters,
+                future: this.machines,
                 builder: (context,snapshot){
                   if(snapshot.connectionState==ConnectionState.done){
                     // print(snapshot.data.toString());

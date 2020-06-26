@@ -85,7 +85,8 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
   }
 
   Container showInfo(String email,String username,String mobile){
-    return Container(
+    return Container(color: Colors.white,
+
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

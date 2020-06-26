@@ -174,6 +174,9 @@ class _PrerigstrationState extends State<Prerigstration> {
                       prefixIcon: Icon(Icons.phone,color: this.color)
                   ),
                     validator: (phone) {
+                    if ( phone.isEmpty){
+                      return "please make sure to put the contact number";
+                    }
                     },
                   onSaved: (contactno){
                     this.contactno=contactno;
@@ -371,7 +374,11 @@ class _PrerigstrationState extends State<Prerigstration> {
                 }
               }
               if (json.decode(onValue.body).containsKey("user")){
-                wrongInfoMsg =json.decode(onValue.body)["user"]["username"];
+                if ( json.decode(onValue.body)["user"]["username"] is List){
+                  wrongInfoMsg =json.decode(onValue.body)["user"]["username"][0];
+                }else{
+                  wrongInfoMsg =json.decode(onValue.body)["user"]["username"];
+                }
               }
               if (json.decode(onValue.body).containsKey("error")){
                 wrongInfoMsg =json.decode(onValue.body)["error"]["username"].toString();

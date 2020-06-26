@@ -189,6 +189,7 @@ class _showAllCasesState extends State<showAllCases> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "cases",
           backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: () async{

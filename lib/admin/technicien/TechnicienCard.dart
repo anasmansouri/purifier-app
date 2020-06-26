@@ -50,9 +50,9 @@ class _TechnicienCardState extends State<TechnicienCard> {
             child: Column(
               children: <Widget>[
                 Row(children: <Widget>[
-                  Icon(FontAwesomeIcons.user,color: Colors.white,)
+                  Icon(FontAwesomeIcons.userCog,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.staffcontact .toString(),style: styleData,)
+                  Text(widget.staffname .toString(),style: styleData,)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[

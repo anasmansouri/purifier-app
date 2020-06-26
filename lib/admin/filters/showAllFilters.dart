@@ -40,6 +40,7 @@ class _showAllFiltersState extends State<showAllFilters> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: "filters",
         backgroundColor: Colors.greenAccent,
           child: Icon(Icons.add,color: Colors.white,),
           onPressed: (){

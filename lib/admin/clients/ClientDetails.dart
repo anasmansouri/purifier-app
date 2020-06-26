@@ -84,17 +84,18 @@ class _ClientDetailsState extends State<ClientDetails> {
                                                           )
                                     ],
                               ),
+                              widget.email.isEmpty ?
+                              SizedBox():
                               Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                        icon: Icon(Icons.mail, color: color,
-                                                        ),
-                                                        label: Text(widget.email,
-                                                        style: style,),
-                                                        ),
-                                    ],
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[FlatButton.icon(
+                                  icon: Icon(Icons.mail, color: color,
+                                  ),
+                                  label: Text(widget.email,
+                                    style: style,),
+                                ),
+                                ],
                               ),
-
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[FlatButton.icon(

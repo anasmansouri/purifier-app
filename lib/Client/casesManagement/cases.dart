@@ -16,9 +16,9 @@ class Cases extends StatefulWidget {
 class _CasesState extends State<Cases> {
   final TextEditingController controller = new TextEditingController();
   String research = "";
-  Future<List<dynamic>> clients ;
+  Future<List<dynamic>> cases ;
 
-  Future<List<dynamic>> lookForClient({String name}) async {
+  Future<List<dynamic>> lookForCases({String name}) async {
     String urlJson = "http://anasmansouri.ddns.net:8000/management/Cases/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -30,7 +30,7 @@ class _CasesState extends State<Cases> {
   }
   @override
   Widget build(BuildContext   context) {
-    this.clients = lookForClient(name: research);
+    this.cases = lookForCases(name: research);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -40,7 +40,6 @@ class _CasesState extends State<Cases> {
               height: 50,
               child: TextFormField(
                 onChanged: (text){
-
                   setState(() {
                     research = text.toString();
                   });
@@ -49,7 +48,7 @@ class _CasesState extends State<Cases> {
                 textAlignVertical:TextAlignVertical.bottom,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                 labelText: 'Enter the date or the type of the case :',
+                 labelText: 'Enter the date or the type of the case',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24)
                   ),
@@ -58,7 +57,7 @@ class _CasesState extends State<Cases> {
             ),SizedBox(height: 5,),
             Expanded(
               child: FutureBuilder(
-                future: this.clients,
+                future: this.cases,
                 builder: (context,snapshot){
                   if(snapshot.connectionState==ConnectionState.done){
                     return   ListView.builder(

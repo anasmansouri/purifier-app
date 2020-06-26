@@ -68,8 +68,9 @@ class _UpdateMachineState extends State<UpdateMachine> {
     String month=arr[1];
     String day = arr[2];
     return Scaffold(
-
-      body: SingleChildScrollView( // hadi 7lina biha l mouchkil dyal l clavier kayghati l boutounate
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        // hadi 7lina biha l mouchkil dyal l clavier kayghati l boutounate
         child: SafeArea(
           child: Form(
             key: formKey,
@@ -134,7 +135,12 @@ class _UpdateMachineState extends State<UpdateMachine> {
                       fontFamily: "Poppins",
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 5),
+                  SizedBox(height: 20,),Text("next service date ",style: new TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 20
+                  ),),
+                  SizedBox(height: 10),
                   SizedBox(
                   height: 80,
                   child: CupertinoDatePicker(

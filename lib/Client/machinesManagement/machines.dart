@@ -50,7 +50,7 @@ class _MachinesState extends State<Machines> {
                 textAlignVertical:TextAlignVertical.bottom,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                 labelText: 'Enter the machine id',
+                 labelText: 'type the machine info ',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24)
                   ),

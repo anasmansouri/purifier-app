@@ -9,6 +9,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import 'Login.dart';
+
 class Verify_email extends StatefulWidget {
   @override
   _Verify_emailState createState() => _Verify_emailState();
@@ -146,8 +148,9 @@ class _Verify_emailState extends State<Verify_email> {
               wrongInfo=false;
               wrongInfoMsg="";
               Toast.show("your email is verified", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-              Navigator.pushReplacementNamed(
-                  context, '/Login');
+
+              Route route = MaterialPageRoute(builder: (context) => Login());
+              Navigator.pushAndRemoveUntil(context,route,(Route<dynamic> route)=> false);
                         }else{
               wrongInfo=true;
               wrongInfoMsg = json.decode(onValue.body)["error"].toString();
