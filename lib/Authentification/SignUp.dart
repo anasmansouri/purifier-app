@@ -16,7 +16,7 @@ import 'package:email_validator/email_validator.dart';
 
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
@@ -214,6 +214,7 @@ class _SignUpState extends State<SignUp> {
                       width: 120,
                       height: 50,
                       onPressed: () async {
+                        Toast.show("wait ...", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
                         await submit();
 // After [onPressed], it will trigger animation running backwards, from end to beginning
                         return () {
