@@ -42,7 +42,7 @@ class _CreateMachineState extends State<CreateMachine> {
   String installdate ;
   String nextservicedate ;
   String producttype ="F";
-  String price ;
+  int price ;
   String username;
   String userId;
   String installaddress2;
@@ -225,7 +225,7 @@ class _CreateMachineState extends State<CreateMachine> {
                         }
                       },
                       onSaved: (price){
-                        this.price=price;
+                        this.price= int.parse( price);
                       },
                       keyboardType: TextInputType.number,
                       style: new TextStyle(
@@ -418,7 +418,7 @@ class _CreateMachineState extends State<CreateMachine> {
     DateTime installdate,
     String producttype,
     DateTime nextservicedate,
-    String price,
+    int price,
     String tocken
   }) async {
     _installdate =DateTime.now();
@@ -451,7 +451,39 @@ class _CreateMachineState extends State<CreateMachine> {
       ),
     );
   }
-   Future<void> submit() async {
+
+
+
+  Future<http.Response> updateMainPackPrice({
+    String main_pack_id,
+    int price,
+    String tocken
+  }) async {
+    return http.put(
+      Constants.server_ip+'management/update_main_pack_price/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':'Token $tocken'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "packagecode":main_pack_id,
+        "price":price
+      }
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+  Future<void> submit() async {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       try {
@@ -472,7 +504,9 @@ class _CreateMachineState extends State<CreateMachine> {
             }else if(json.decode(onValue.body).containsKey("machineid")){
               wrongInfo=false;
               wrongInfoMsg="";
-              Navigator.pop(context,true);
+              updateMainPackPrice(tocken: widget.tocken,main_pack_id: main_pack_id,price: this.price).then((onValue){
+                Navigator.pop(context,true);
+              });
             }else{
               wrongInfo=true;
               wrongInfoMsg = "there is something wrong";

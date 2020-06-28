@@ -113,7 +113,7 @@ class _CreateMainPackState extends State<CreateMainPack> {
         ),
       ),
                   SizedBox(height: 20),
-                  new TextFormField(
+                 /* new TextFormField(
                     decoration: new InputDecoration(
                         labelText: "Enter price ",
                         fillColor: Colors.white,
@@ -135,7 +135,7 @@ class _CreateMainPackState extends State<CreateMainPack> {
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
-                  ),SizedBox(height: 20),
+                  ),SizedBox(height: 20),*/
                   new TextFormField(
                     decoration: new InputDecoration(
                         labelText: "Enter exfiltermonth ",
@@ -260,7 +260,7 @@ class _CreateMainPackState extends State<CreateMainPack> {
       },
       body: jsonEncode(<String, dynamic>{
           "packagecode": packagecode,
-          "price":price,
+          "price":0,
           "exfiltermonth": exfiltermonth,
           "exfiltervolume": exfiltervolume,
           "packagedetail": packagedetail

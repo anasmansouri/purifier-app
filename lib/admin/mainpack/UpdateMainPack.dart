@@ -86,7 +86,7 @@ class _UpdateMainPackState extends State<UpdateMainPack> {
                   ),Center(child: Alert()),
                   SizedBox(height: 60,),
                   SizedBox(height: 20),
-                  new TextFormField(
+                /*  new TextFormField(
                     initialValue: widget.price,
                     decoration: new InputDecoration(
                         labelText: "Enter price ",
@@ -109,7 +109,7 @@ class _UpdateMainPackState extends State<UpdateMainPack> {
                     style: new TextStyle(
                       fontFamily: "Poppins",
                     ),
-                  ),SizedBox(height: 20),
+                  ),SizedBox(height: 20),*/
                   new TextFormField(
                     initialValue: widget.exfiltermonth,
                     decoration: new InputDecoration(
