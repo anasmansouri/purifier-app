@@ -21,6 +21,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 
 class CreateTechnicien extends StatefulWidget {
 
@@ -50,13 +52,12 @@ class _CreateTechnicienState extends State<CreateTechnicien> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -245,7 +246,7 @@ class _CreateTechnicienState extends State<CreateTechnicien> {
   String email}) async {
 
     return http.post(
-      'http://anasmansouri.ddns.net:8000/management/Technicians/',
+      Constants.server_ip+'management/Technicians/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

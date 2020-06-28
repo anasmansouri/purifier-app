@@ -8,6 +8,7 @@ import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
 import 'package:purifiercompanyapp/admin/filters/CreateFilter.dart';
 import 'package:purifiercompanyapp/admin/filters/FilterCard.dart';
 import 'package:purifiercompanyapp/admin/mainpack/CreateMainPack.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 
 
@@ -25,7 +26,7 @@ class _showAllFiltersState extends State<showAllFilters> {
   Future<List<dynamic>> filters ;
 
   Future<List<dynamic>> lookForFilters({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/Filters/?search=$indice";
+    String urlJson = Constants.server_ip+"management/Filters/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -92,7 +93,7 @@ class _showAllFiltersState extends State<showAllFilters> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

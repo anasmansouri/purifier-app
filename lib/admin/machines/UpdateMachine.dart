@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'dart:io';
 
 import '../home.dart';
@@ -47,13 +48,12 @@ class _UpdateMachineState extends State<UpdateMachine> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -136,10 +136,11 @@ class _UpdateMachineState extends State<UpdateMachine> {
                     ),
                   ),
                   SizedBox(height: 5),
-                  SizedBox(height: 20,),Text("next service date ",style: new TextStyle(
+                  SizedBox(height: 20,),
+                  Text("next service date ",style: new TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 20
-                  ),),
+                  ),overflow: TextOverflow.ellipsis),
                   SizedBox(height: 10),
                   SizedBox(
                   height: 80,
@@ -203,7 +204,7 @@ class _UpdateMachineState extends State<UpdateMachine> {
     String tocken,
   }) async {
     return http.put(
-      'http://anasmansouri.ddns.net:8000/management/update_machine_info/',
+      Constants.server_ip+'management/update_machine_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

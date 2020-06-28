@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
  import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 import 'MachineCard.dart';
 
@@ -20,7 +21,7 @@ class _MachinesState extends State<Machines> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForClient({String name}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/Machines/?search=$name";
+    String urlJson = Constants.server_ip+"management/Machines/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -70,7 +71,7 @@ class _MachinesState extends State<Machines> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

@@ -66,19 +66,19 @@ class _CaseCardState extends State<CaseCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.calendarAlt,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.scheduledate .toString(),style: styleData,)
+                  Text(widget.scheduledate .toString(),style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.userCog,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.handledby.toString(),style: styleData,)
+                    Text(widget.handledby.toString(),style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.mapMarkerAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.machines[0]["installaddress1"],style: styleData,)
+                    Text(widget.machines[0]["installaddress1"],style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),

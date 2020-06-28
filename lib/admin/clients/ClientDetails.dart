@@ -33,13 +33,15 @@ class _ClientDetailsState extends State<ClientDetails> {
     }else{
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[FlatButton.icon(
+        children: <Widget>[Flexible(child: FlatButton.icon(
           icon: Icon(
             FontAwesomeIcons.mapMarkerAlt, color: color,
           ),
-          label: Text(widget.billingaddress2,
-            style: style,),
-        ),
+          label: Flexible(
+            child: Text(widget.billingaddress2,
+              style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+          ),
+        )),
         ],
       );
 
@@ -51,12 +53,16 @@ class _ClientDetailsState extends State<ClientDetails> {
       }else{
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[FlatButton.icon(
-            icon: Icon(
-              FontAwesomeIcons.exclamationTriangle, color: color,
+          children: <Widget>[Flexible(
+            child: FlatButton.icon(
+              icon: Icon(
+                FontAwesomeIcons.exclamationTriangle, color: color,
+              ),
+              label: Flexible(
+                child: Text("email not verified",
+                  style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+              ),
             ),
-            label: Text("email not verified",
-              style: style,),
           ),
           ],
         );
@@ -64,64 +70,83 @@ class _ClientDetailsState extends State<ClientDetails> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                              SizedBox(height: 50,),
-                              Icon(Icons.perm_identity, size: 130, color: color,),
-                              SizedBox(height: 50),
-                              SizedBox(height: 20,),
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                          icon: Icon(FontAwesomeIcons.idCard, color: color,
-                                                          ),
-                                                          label: Text(widget.username,
-                                                          style: style,),
-                                                          )
-                                    ],
-                              ),
-                              widget.email.isEmpty ?
-                              SizedBox():
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[FlatButton.icon(
-                                  icon: Icon(Icons.mail, color: color,
-                                  ),
-                                  label: Text(widget.email,
-                                    style: style,),
-                                ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[FlatButton.icon(
-                                  icon: Icon(
-                                    FontAwesomeIcons.mapMarkerAlt, color: color,
-                                  ),
-                                  label: Text(widget.billingaddress1,
-                                    style: style,),
-                                ),
-                                ],
-                              ),
-                              managing_the_billing_adress2(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[FlatButton.icon(
-                            icon: Icon(
-                              FontAwesomeIcons.phone, color: color,
-                            ),
-                            label: Text(widget.mobile,
-                              style: style,),
-                          ),
-                          ],
-                        ),
-                        is_confirmed()
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                                    SizedBox(height: 50,),
+                                    Icon(Icons.perm_identity, size: 130, color: color,),
+                                    SizedBox(height: 50),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[Flexible(child :FlatButton.icon(
+                                                                icon: Icon(FontAwesomeIcons.idCard, color: color,
+                                                                ),
+                                                                label: Flexible(
+                                                                  child: Text(widget.username,
+                                                                  style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                                                ),
+                                                                ))
+                                          ],
+                                    ),
+                                    widget.email.isEmpty ?
+                                    SizedBox():
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: FlatButton.icon(
+                                            icon: Icon(Icons.mail, color: color,
+                                            ),
+                                            label:   Flexible(child:  Text(widget.email,
+                                              style: style,softWrap: true,overflow: TextOverflow.ellipsis),),
+                                          ),
+                                        ),
 
-                      ],
-                      ));
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[Flexible(child :FlatButton.icon(
+                                        icon: Icon(
+                                          FontAwesomeIcons.mapMarkerAlt, color: color,
+                                        ),
+                                        label: Flexible(
+                                          child: Text(widget.billingaddress1,
+                                            style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                        ),
+                                      )),
+                                      ],
+                                    ),
+                                    managing_the_billing_adress2(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[Flexible(
+                                  child: FlatButton.icon(
+                                    icon: Icon(
+                                      FontAwesomeIcons.phone, color: color,
+                                    ),
+                                    label: Flexible(
+                                      child: Text(widget.mobile,
+                                        style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                    ),
+                                  ),
+                                ),
+                                ],
+                              ),
+                              is_confirmed()
+
+                            ],
+                            )),
+        ),
+      ),
+    );
   }
 }

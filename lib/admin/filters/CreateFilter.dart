@@ -21,6 +21,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 
 class CreateFilter extends StatefulWidget {
 
@@ -52,13 +54,12 @@ class _CreateFilterState extends State<CreateFilter> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -230,7 +231,7 @@ class _CreateFilterState extends State<CreateFilter> {
   }) async {
 
     return http.post(
-      'http://anasmansouri.ddns.net:8000/management/Filters/',
+      Constants.server_ip+'management/Filters/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

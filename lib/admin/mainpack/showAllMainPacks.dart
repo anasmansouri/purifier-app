@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
 import 'package:purifiercompanyapp/admin/mainpack/CreateMainPack.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'MainPackCard.dart';
 
 
@@ -23,7 +24,7 @@ class _showAllMainPacksState extends State<showAllMainPacks> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForMainPacks({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/MainPacks/?search=$indice";
+    String urlJson = Constants.server_ip+"management/MainPacks/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -93,7 +94,7 @@ class _showAllMainPacksState extends State<showAllMainPacks> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

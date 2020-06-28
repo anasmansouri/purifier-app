@@ -52,19 +52,19 @@ class _FilterCardState extends State<FilterCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.idCard,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.filtercode .toString(),style: styleData,)
+                  Text(widget.filtercode .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.moneyBill,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.price.toString(),style: styleData,)
+                    Text(widget.price.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.signature,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.filtername.toString(),style: styleData,)
+                    Text(widget.filtername.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),

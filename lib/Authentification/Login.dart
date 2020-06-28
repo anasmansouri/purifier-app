@@ -12,6 +12,8 @@ import 'package:purifiercompanyapp/Client/home.dart';
 import 'package:purifiercompanyapp/admin/home.dart';
 import 'dart:io';
 
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -31,12 +33,12 @@ class _LoginState extends State<Login> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
         color: Colors.red,
         fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -70,11 +72,10 @@ class _LoginState extends State<Login> {
                       color: this.color,
                       fontSize: 50,
                       fontFamily: 'BalooBhai'
-                  ),)
+                  ),overflow: TextOverflow.ellipsis)
               ),SizedBox(height: 20,),
               Center(child: Alert()),
               SizedBox(height: height / 20,),
-
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Form(
@@ -126,7 +127,7 @@ class _LoginState extends State<Login> {
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
-                              ),),
+                              ),overflow: TextOverflow.ellipsis),
                             //  progressWidget: const CircularProgressIndicator(),
                             progressWidget: SpinKitRotatingCircle(
                               color: this.color,
@@ -154,6 +155,8 @@ class _LoginState extends State<Login> {
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline),
+                                  overflow: TextOverflow.ellipsis
+
                               ),
                             ),SizedBox(width: width/10,),
                             InkWell(
@@ -170,7 +173,8 @@ class _LoginState extends State<Login> {
                                     color: this.color,
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline),
+                                    decoration: TextDecoration.underline)
+                                  ,overflow: TextOverflow.ellipsis
                               ),
                             ),
                           ],
@@ -190,7 +194,7 @@ class _LoginState extends State<Login> {
 
   Future<http.Response> submitInfo(String username, String password) async {
    return http.post(
-      'http://anasmansouri.ddns.net:8000/security/api-token-auth/',
+     Constants.server_ip+'security/api-token-auth/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

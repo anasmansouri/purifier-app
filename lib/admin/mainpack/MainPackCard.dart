@@ -53,26 +53,26 @@ class _MainPackCardState extends State<MainPackCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.idCard,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.packagecode .toString(),style: styleData,)
+                  Text(widget.packagecode .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.moneyBill,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.price.toString(),style: styleData,)
+                    Text(widget.price.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.hourglassHalf,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.exfiltermonth.toString(),style: styleData,)
+                    Text(widget.exfiltermonth.toString(),softWrap: true,style: styleData,)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.prescriptionBottle,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.exfiltervolume.toString(),style: styleData,)
+                    Text(widget.exfiltervolume.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
               ],

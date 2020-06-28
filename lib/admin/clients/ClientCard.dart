@@ -51,19 +51,19 @@ class _ClientCardState extends State<ClientCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.user,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.username .toString(),style: styleData,)
+                  Text(widget.username .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.mobileAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.mobile,style: styleData,)
+                    Text(widget.mobile,softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.calendarAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.joindate,style: styleData,)
+                    Text(widget.joindate,softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
               ],

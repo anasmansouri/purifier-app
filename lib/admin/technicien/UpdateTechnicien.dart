@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'dart:io';
 
 import '../home.dart';
@@ -48,13 +49,12 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -226,7 +226,7 @@ class _UpdateTechnicienState extends State<UpdateTechnicien> {
   String email}) async {
 
     return http.put(
-      'http://anasmansouri.ddns.net:8000/management/update_technicien_info/',
+      Constants.server_ip+'management/update_technicien_info/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

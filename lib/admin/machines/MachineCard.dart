@@ -60,33 +60,33 @@ class _MachineCardState extends State<MachineCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.idCard,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.machineid .toString(),style: styleData,)
+                  Text(widget.machineid .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.moneyBill,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.price.toString(),style: styleData,)
+                    Text(widget.price.toString(),style: styleData,softWrap: true,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.signature,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.mac.toString(),style: styleData,)
+                    Text(widget.mac.toString(),style: styleData,softWrap: true,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.calendarAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.nextservicedate.toString(),style: styleData,)
+                    Text(widget.nextservicedate.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.user,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.username.toString(),style: styleData,)
+                    Text(widget.username.toString(),style: styleData,softWrap: true,overflow: TextOverflow.ellipsis)
                   ],
                 ),
                 SizedBox(height: 8,),

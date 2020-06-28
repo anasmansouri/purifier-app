@@ -49,13 +49,13 @@ class _CaseCardState extends State<CaseCard> {
                 Row(children: <Widget>[
                     Icon(FontAwesomeIcons.screwdriver,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.casetype.toString(),style: styleData,)
+                  Text(widget.casetype.toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.calendarAlt,color: Colors.white,),
                     SizedBox(width: 65,),
-                    Text(widget.scheduledate,style: styleData,)
+                    Text(widget.scheduledate,softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 )
               ],

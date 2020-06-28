@@ -32,87 +32,104 @@ class _TechnicienDetailsState extends State<TechnicienDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                              SizedBox(height: 50,),
-                              Icon(FontAwesomeIcons.userCog, size: 130, color: color,),
-                              SizedBox(height: 50),
-                              SizedBox(height: 20,),
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                          icon: Icon(FontAwesomeIcons.idCard, color: color,
-                                                          ),
-                                                          label: Text(widget.staffcode,
-                                                          style: style,),
-                                                          )
-                                    ],
-                              ),
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                        icon: Icon(Icons.mail, color: color,
-                                                        ),
-                                                        label: Text(widget.email,
-                                                        style: style,),
-                                                        ),
-                                    ],
-                              ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                                    SizedBox(height: 50,),
+                                    Icon(FontAwesomeIcons.userCog, size: 130, color: color,),
+                                    SizedBox(height: 50),
+                                    SizedBox(height: 20,),
+                                    Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[Flexible(
+                                            child: FlatButton.icon(
+                                                                  icon: Icon(FontAwesomeIcons.idCard, color: color,
+                                                                  ),
+                                                                  label: Flexible(
+                                                                    child: Text(widget.staffcode,
+                                                                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                                                  ),
+                                                                  ),
+                                          )
+                                          ],
+                                    ),
+                                    Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[Flexible(child:FlatButton.icon(
+                                                              icon: Icon(Icons.mail, color: color,
+                                                              ),
+                                                              label: Flexible(
+                                                                child: Text(widget.email,overflow: TextOverflow.ellipsis,
+                                                                style: style,softWrap: true,),
+                                                              ),
+                                                              )),
+                                          ],
+                                    ),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[FlatButton.icon(
-                                  icon: Icon(
-                                    FontAwesomeIcons.user, color: color,
-                                  ),
-                                  label: Text(widget.staffname,
-                                    style: style,),
-                                ),
-                                ],
-                              ),SizedBox(height: 20,),
-                        Center(
-                            child:ProgressButton(
-                              borderRadius: 20,
-                              color: color,
-                              defaultWidget: const Text('Update',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ),),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[Flexible(
+                                        child: FlatButton.icon(
+                                          icon: Icon(
+                                            FontAwesomeIcons.user, color: color,
+                                          ),
+                                          label: Flexible(
+                                            child: Text(widget.staffname,
+                                              style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                      ),
+                                      ],
+                                    ),SizedBox(height: 20,),
+                              Center(
+                                  child:ProgressButton(
+                                    borderRadius: 20,
+                                    color: color,
+                                    defaultWidget: const Text('Update',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),),
 //  progressWidget: const CircularProgressIndicator(),
-                              progressWidget:SpinKitRotatingCircle   (
-                                color: Colors.red,
-                                size: 50.0,
-                              ) ,
-                              width: 120,
-                              height: 50,
-                              onPressed: () async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>UpdateTechnicien(tocken: widget.tocken,staffshort: widget.staffshort,
-                                    staffname: widget.staffname,staffcontact: widget.staffcontact,staffcode: widget.staffcode,
-                                    email: widget.email,userId:widget.userId))
-                                );
+                                    progressWidget:SpinKitRotatingCircle   (
+                                      color: Colors.red,
+                                      size: 50.0,
+                                    ) ,
+                                    width: 120,
+                                    height: 50,
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) =>UpdateTechnicien(tocken: widget.tocken,staffshort: widget.staffshort,
+                                          staffname: widget.staffname,staffcontact: widget.staffcontact,staffcode: widget.staffcode,
+                                          email: widget.email,userId:widget.userId))
+                                      );
 // After [onPressed], it will trigger animation running backwards, from end to beginning
-                                return () {
+                                      return () {
 // Optional returns is returning a function that can be called
 // after the animation is stopped at the beginning.
 // A best practice would be to do time-consuming task in [onPressed],
 // and do page navigation in the returned function.
 // So that user won't missed out the reverse animation.
-                                };
-                              },
-                            )
+                                      };
+                                    },
+                                  )
 
 
-                        ),
+                              ),
 
 
-                      ],
-                      ));
+                            ],
+                            )),
+        ),
+      ),
+    );
   }
 }

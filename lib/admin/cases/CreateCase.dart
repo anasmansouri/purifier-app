@@ -19,6 +19,9 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:toast/toast.dart';
 
+// constants
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 class CreateCase extends StatefulWidget {
 
   String tocken;
@@ -61,13 +64,12 @@ class _CreateCaseState extends State<CreateCase> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -114,7 +116,7 @@ class _CreateCaseState extends State<CreateCase> {
                           style: new TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 17
-                          ),),
+                          ),overflow: TextOverflow.ellipsis),
                         SizedBox(width: 60),
                         DropdownButton<String>(
                           value: this.caseType,
@@ -132,7 +134,7 @@ class _CreateCaseState extends State<CreateCase> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,overflow: TextOverflow.ellipsis),
                             );
                           }).toList(),
                         ),
@@ -146,7 +148,7 @@ class _CreateCaseState extends State<CreateCase> {
                           style: new TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 17
-                          ),),
+                          ),overflow: TextOverflow.ellipsis),
                         SizedBox(width: 60),
                         DropdownButton<String>(
                           value: technicien_id_choosen.isEmpty ? widget.techniciens[0] : technicien_id_choosen,
@@ -163,7 +165,7 @@ class _CreateCaseState extends State<CreateCase> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,overflow: TextOverflow.ellipsis),
                             );
                           }).toList(),
                         ),
@@ -176,7 +178,7 @@ class _CreateCaseState extends State<CreateCase> {
                           style: new TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 17
-                          ),),
+                          ),overflow: TextOverflow.ellipsis),
                         SizedBox(width: 60),
                         DropdownButton<String>(
                           icon: Icon(Icons.arrow_downward),
@@ -193,7 +195,7 @@ class _CreateCaseState extends State<CreateCase> {
                           items: widget.machines.map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,overflow: TextOverflow.ellipsis),
                             );
                           }).toList(),
                         ),
@@ -206,7 +208,7 @@ class _CreateCaseState extends State<CreateCase> {
                           style: new TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 17
-                          ),),
+                          ),overflow: TextOverflow.ellipsis),
                         SizedBox(width: 60),
                         DropdownButton<String>(
                           icon: Icon(Icons.arrow_downward),
@@ -223,7 +225,7 @@ class _CreateCaseState extends State<CreateCase> {
                           items: widget.filters.map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value,overflow: TextOverflow.ellipsis),
                             );
                           }).toList(),
                         ),
@@ -298,7 +300,7 @@ class _CreateCaseState extends State<CreateCase> {
                     Text("scheduledate",style: new TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 20
-                    ),),
+                    ),overflow: TextOverflow.ellipsis),
                     SizedBox(
                       height: 80,
                       child: CupertinoDatePicker(
@@ -320,7 +322,7 @@ class _CreateCaseState extends State<CreateCase> {
                     Text("time",style: new TextStyle(
                         fontFamily: "Poppins",
                         fontSize: 20
-                    ),),
+                    ),overflow: TextOverflow.ellipsis),
                     SizedBox(
                       height: 80,
                       child: CupertinoDatePicker(
@@ -403,7 +405,7 @@ class _CreateCaseState extends State<CreateCase> {
     }
 
     return http.post(
-      'http://anasmansouri.ddns.net:8000/management/Cases/',
+      Constants.server_ip+'management/Cases/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

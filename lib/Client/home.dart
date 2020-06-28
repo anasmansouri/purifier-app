@@ -34,7 +34,7 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
     return Scaffold(
       backgroundColor:Colors.grey.shade200,
       appBar: AppBar(
-        title: Text("osmosis")
+        title: Text("osmosis",overflow: TextOverflow.ellipsis)
       ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
@@ -66,14 +66,14 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
               currentIndex: cIndex,
               items: <FancyBottomNavigationItem>[
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.home), title: Text('Home')),
+                    icon: Icon(Icons.home), title: Text('Home',overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.person), title: Text('User')),
+                    icon: Icon(Icons.person), title: Text('User',overflow: TextOverflow.ellipsis)),
 
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.menu), title: Text('cases')),
+                    icon: Icon(Icons.menu), title: Text('cases',overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.settings), title: Text('Settings')),
+                    icon: Icon(Icons.settings), title: Text('Settings',overflow: TextOverflow.ellipsis)),
               ],
               onItemSelected: (int value) {
                 indexcontroller.add(value);
@@ -208,7 +208,6 @@ class _FancyBottomNavigationState extends State<FancyBottomNavigation> {
           return GestureDetector(
             onTap: () {
               onItemSelected(index);
-
               setState(() {
                 _selectedIndex = index;
               });

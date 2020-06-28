@@ -30,74 +30,94 @@ class _MachineDetailsState extends State<MachineDetails> {
   Map<String, String> typeOfMachine = {'WPU': 'Water Purifier', 'U': 'Under Sink', 'F': 'Filter'};
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Icon(FontAwesomeIcons.cogs, size: 130, color: color,),
-            SizedBox(height: 50,),
-            Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[FlatButton.icon(
-            icon: Icon(FontAwesomeIcons.idCard, color: color,
-            ),
-            label: Text(widget.machineId,
-            style: style,),
-            )
-            ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: <Widget>[FlatButton.icon(
-
-                icon: Icon(FontAwesomeIcons.robot, color: color,
-                ),
-                label: Text(typeOfMachine[widget.producttype] ,
-                  style: style,),
-              ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: <Widget>[FlatButton.icon(
-                icon: Icon(
-                  FontAwesomeIcons.tools, color: color,
-                ),
-                label: Text(widget.nextservicedate,
-                  style: style,),
-              ),
-              ],
-            ),Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: <Widget>[FlatButton.icon(
-                  icon: Icon(FontAwesomeIcons.passport, color: color,
-                  ),
-                  label: Text(widget.mac,
-                    style: style,),
-                )
-                ],
-            ),
-                Row(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            color: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 60,),
+                  Icon(FontAwesomeIcons.cogs, size: 130, color: color,),
+                  SizedBox(height: 50,),
+                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Flexible(child:FlatButton.icon(
-                    icon: Icon(
-                      FontAwesomeIcons.mapMarkerAlt, color: color,
-                    ),
-                    label: Flexible(child:  Text(widget.location,
-                      softWrap: true,
-                      style: new TextStyle(fontSize: 20,color: color),),)
-                  )),
+                  children: <Widget>[Flexible(child: FlatButton.icon(
+                  icon: Icon(FontAwesomeIcons.idCard, color: color,
+                  ),
+                  label: Flexible(
+                    child: Text(widget.machineId,
+                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                  ),
+                  ))
                   ],
-                ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
 
-          ],
-        )
+                    children: <Widget>[Flexible(
+                      child: FlatButton.icon(
+
+                        icon: Icon(FontAwesomeIcons.robot, color: color,
+                        ),
+                        label: Flexible(
+                          child: Text(typeOfMachine[widget.producttype] ,
+                            style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                    ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: <Widget>[Flexible(child : FlatButton.icon(
+                      icon: Icon(
+                        FontAwesomeIcons.tools, color: color,
+                      ),
+                      label: Flexible(
+                        child: Text(widget.nextservicedate,
+                          style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                      ),
+                    )),
+                    ],
+                  ),Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: <Widget>[Flexible(
+                      child: FlatButton.icon(
+                          icon: Icon(FontAwesomeIcons.passport, color: color,
+                          ),
+                          label: Flexible(
+                            child: Text(widget.mac,
+                              style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                          ),
+                        ),
+                    )
+                      ],
+                  ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[Flexible(child:FlatButton.icon(
+                          icon: Icon(
+                            FontAwesomeIcons.mapMarkerAlt, color: color,
+                          ),
+                          label: Flexible(child:  Text(widget.location,
+                            softWrap: true,
+                            style: new TextStyle(fontSize: 20,color: color),overflow: TextOverflow.ellipsis),)
+                        )),
+                        ],
+                      ),
+
+                ],
+              )
+          ),
+        ),
+      ),
     );;
   }
 }

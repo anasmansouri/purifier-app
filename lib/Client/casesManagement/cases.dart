@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/Client/casesManagement/CaseCard.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 class Cases extends StatefulWidget {
   String tocken;
@@ -19,7 +20,7 @@ class _CasesState extends State<Cases> {
   Future<List<dynamic>> cases ;
 
   Future<List<dynamic>> lookForCases({String name}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/Cases/?search=$name";
+    String urlJson = Constants.server_ip+"management/Cases/?search=$name";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -67,7 +68,7 @@ class _CasesState extends State<Cases> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

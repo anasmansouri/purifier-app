@@ -52,7 +52,7 @@ class _TechnicienCardState extends State<TechnicienCard> {
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.userCog,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(widget.staffname .toString(),style: styleData,)
+                  Text(widget.staffname .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
@@ -64,7 +64,7 @@ class _TechnicienCardState extends State<TechnicienCard> {
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.idCard,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.staffcode,style: styleData)
+                    Text(widget.staffcode,style: styleData,softWrap: true,overflow: TextOverflow.ellipsis)
                   ],
                 ),
               ],

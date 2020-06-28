@@ -8,6 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 class ClientInfoDetails extends StatefulWidget {
 
@@ -29,7 +30,7 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
 
   Future<dynamic> get_client_info(String token) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/security/accounts/'+widget.userId,
+        Constants.server_ip+'security/accounts/'+widget.userId,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'token $token'
@@ -73,9 +74,19 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    print("height "+height.toString()+"\nwidth "+width.toString());
 
     if(this.no_data_problem && this.good_internet_connexion){
-      return showInfo(this.email,this.contactName, this.mobileNumber);
+      return Scaffold(backgroundColor: Colors.white,body: SingleChildScrollView(
+          child: SafeArea(child: showInfo(email: this.email,mobile: this.contactName,username: this.contactName,height:height,width: width))));
     }else{
       return SpinKitCircle(
         color: Colors.blue,
@@ -84,25 +95,26 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
     }
   }
 
-  Container showInfo(String email,String username,String mobile){
+  Container showInfo({var height,var width,String email,String username,String mobile}){
     return Container(color: Colors.white,
 
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 50,),
+            SizedBox(height: height/16,),
             Icon(Icons.perm_identity, size: 130, color: color,),
-            SizedBox(height: 50),
-
-            SizedBox(height: 20,),
+            SizedBox(height: height/16),
+            SizedBox(height: height/40,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[FlatButton.icon(
                 icon: Icon(FontAwesomeIcons.idCard, color: color,
                 ),
-                label: Text(username,
-                  style: style,),
+                label: Flexible(
+                  child: Text(username,
+                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                ),
               )
               ],
             ),
@@ -111,8 +123,10 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
               children: <Widget>[FlatButton.icon(
                 icon: Icon(Icons.mail, color: color,
                 ),
-                label: Text(email,
-                  style: style,),
+                label: Flexible(
+                  child: Text(email,
+                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                ),
               ),
               ],
             ),
@@ -122,8 +136,10 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
                 icon: Icon(
                   FontAwesomeIcons.phone, color: color,
                 ),
-                label: Text(mobile,
-                  style: style,),
+                label: Flexible(
+                  child: Text(mobile,
+                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                ),
               ),
               ],
             ),

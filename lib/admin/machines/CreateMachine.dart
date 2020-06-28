@@ -18,6 +18,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 
 class CreateMachine extends StatefulWidget {
 
@@ -63,13 +65,13 @@ class _CreateMachineState extends State<CreateMachine> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
 
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -158,7 +160,7 @@ class _CreateMachineState extends State<CreateMachine> {
                       onSaved: (address1){
                         this.installaddress1=address1;
                       },
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.text,
                       style: new TextStyle(
                         fontFamily: "Poppins",
                       ),
@@ -429,7 +431,7 @@ class _CreateMachineState extends State<CreateMachine> {
     }
 
     return http.post(
-      'http://anasmansouri.ddns.net:8000/management/Machines/',
+      Constants.server_ip+'management/Machines/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'Token $tocken'

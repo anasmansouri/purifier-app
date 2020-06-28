@@ -9,6 +9,7 @@ import 'package:purifiercompanyapp/admin/filters/CreateFilter.dart';
 import 'package:purifiercompanyapp/admin/filters/FilterCard.dart';
 import 'package:purifiercompanyapp/admin/machines/CreateMachine.dart';
 import 'package:purifiercompanyapp/admin/mainpack/CreateMainPack.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 import 'dart:io';
 
@@ -35,7 +36,7 @@ class _showAllMachinesState extends State<showAllMachines> {
   List <String> main_packs = new List <String>();
 
   Future<List<dynamic>> lookForMachines({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/machine_search/?search=$indice";
+    String urlJson = Constants.server_ip+"management/machine_search/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -51,7 +52,7 @@ class _showAllMachinesState extends State<showAllMachines> {
     String tocken
   }) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/management/client_name_and_id/',
+        Constants.server_ip+'management/client_name_and_id/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -64,7 +65,7 @@ class _showAllMachinesState extends State<showAllMachines> {
     String tocken
   }) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/management/MainPacks/',
+        Constants.server_ip+'management/MainPacks/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -211,7 +212,7 @@ class _showAllMachinesState extends State<showAllMachines> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

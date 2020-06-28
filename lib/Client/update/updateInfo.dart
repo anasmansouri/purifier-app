@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/Client/update/changePassword.dart';
 import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 
 
@@ -37,12 +38,12 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -87,7 +88,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                             Icons.lock_outline,
                             color: Colors.blue,
                           ),
-                          title: Text("Change Password"),
+                          title: Text("Change Password",overflow: TextOverflow.ellipsis),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             Route route = MaterialPageRoute(builder: (context) => ChangePassword(tocken: widget.token,userId:  widget.userId,));
@@ -100,7 +101,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                             Icons.mail,
                             color: Colors.blue,
                           ),
-                          title: Text("Change email"),
+                          title: Text("Change email",overflow: TextOverflow.ellipsis),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             //open change language
@@ -117,7 +118,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                             FontAwesomeIcons.idCard,
                             color: Colors.blue,
                           ),
-                          title: Text("Change contact name"),
+                          title: Text("Change contact name",overflow: TextOverflow.ellipsis),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             //open change location
@@ -188,7 +189,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/logout/',
+      Constants.server_ip+'security/logout/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token '+widget.token

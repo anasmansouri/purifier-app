@@ -28,48 +28,53 @@ class _CaseDetailsState extends State<CaseDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-          padding: EdgeInsets.fromLTRB(10, 200, 10, 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(FontAwesomeIcons.screwdriver, size: 130, color: color,),
-              SizedBox(height: 50,),
-              Row(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            color: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 200, 10, 10),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[Icon(FontAwesomeIcons.idCard,color: color,),
-                  SizedBox(width: 20,),
-                  Text(widget.casetype,style: style,)
-                  ,
-                ],
-              ),SizedBox(height: 15,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[Icon(FontAwesomeIcons.calendarAlt,color: color,),
-                  SizedBox(width: 20,),
-                  Text(widget.scheduledate,style: style,)
-                ],
-              ),SizedBox(height: 11,),Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  shrinkWrap: true,
-                  itemCount:widget.listMachines.length,
-                  itemBuilder: (BuildContext ctxt, int index) =>  Row(
+                children: <Widget>[
+                  Icon(FontAwesomeIcons.screwdriver, size: 130, color: color,),
+                  SizedBox(height: 50,),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(FontAwesomeIcons.robot,color: Colors.blue,),
+                    children: <Widget>[Icon(FontAwesomeIcons.idCard,color: color,),
                       SizedBox(width: 20,),
-                      Text(widget.listMachines[index]["machineid"],style: style,),
-                      SizedBox(width: 20,),
-                      Text(typeOfMachine[widget.listMachines[index]["producttype"]] ,style: style,),
-                      SizedBox(height: 39,),
+                      Text(widget.casetype,softWrap: true,style: style,overflow: TextOverflow.ellipsis)
+                      ,
                     ],
+                  ),SizedBox(height: 15,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[Icon(FontAwesomeIcons.calendarAlt,color: color,),
+                      SizedBox(width: 20,),
+                      Text(widget.scheduledate,softWrap: true,style: style,overflow: TextOverflow.ellipsis)
+                    ],
+                  ),SizedBox(height: 11,),Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      shrinkWrap: true,
+                      itemCount:widget.listMachines.length,
+                      itemBuilder: (BuildContext ctxt, int index) =>  Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(FontAwesomeIcons.robot,color: Colors.blue,),
+                          SizedBox(width: 20,),
+                          Text(widget.listMachines[index]["machineid"],style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                          SizedBox(width: 20,),
+                          Text(typeOfMachine[widget.listMachines[index]["producttype"]] ,softWrap: true,style: style,overflow: TextOverflow.ellipsis),
+                          SizedBox(height: 39,),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          )
+                ],
+              )
+          ),
+        ),
       ),
     );;
   }

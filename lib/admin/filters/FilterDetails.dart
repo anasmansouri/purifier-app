@@ -35,100 +35,117 @@ class _FilterDetailsState extends State<FilterDetails> {
     }else{
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[FlatButton.icon(
+        children: <Widget>[Flexible(child : FlatButton.icon(
           icon: Icon(
             FontAwesomeIcons.commentDots, color: color,
           ),
           label: Text(widget.filterdetail,
-            style: style,overflow: TextOverflow.ellipsis,),
-        ),
+            style: style,softWrap: true,overflow: TextOverflow.ellipsis,),
+        )),
         ],
       );
     }
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                              SizedBox(height: 50,),
-                              Icon(FontAwesomeIcons.filter, size: 130, color: color,),
-                              SizedBox(height: 50),
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                          icon: Icon(FontAwesomeIcons.idCard, color: color,
-                                                          ),
-                                                          label: Text(widget.filtercode,
-                                                          style: style,),
-                                                          )
-                                    ],
-                              ),
-                              Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[FlatButton.icon(
-                                                        icon: Icon(FontAwesomeIcons.signature, color: color,
-                                                        ),
-                                                        label: Text(widget.filtername,
-                                                        style: style,),
-                                                        ),
-                                    ],
-                              ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                                    SizedBox(height: 50,),
+                                    Icon(FontAwesomeIcons.filter, size: 130, color: color,),
+                                    SizedBox(height: 50),
+                                    Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[Flexible(
+                                            child: FlatButton.icon(
+                                                                  icon: Icon(FontAwesomeIcons.idCard, color: color,
+                                                                  ),
+                                                                  label: Flexible(
+                                                                    child: Text(widget.filtercode,
+                                                                    style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                                                  ),
+                                                                  ),
+                                          )
+                                          ],
+                                    ),
+                                    Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[Flexible(child : FlatButton.icon(
+                                                              icon: Icon(FontAwesomeIcons.signature, color: color,
+                                                              ),
+                                                              label: Flexible(
+                                                                child: Text(widget.filtername,
+                                                                style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                                              ),
+                                                              )),
+                                          ],
+                                    ),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[FlatButton.icon(
-                                  icon: Icon(
-                                    FontAwesomeIcons.moneyBill, color: color,
-                                  ),
-                                  label: Text(widget.price,
-                                    style: style,),
-                                ),
-                                ],
-                              ),
-                        managementofFilterdetails(),
-                        Center(
-                            child:ProgressButton(
-                              borderRadius: 20,
-                              color: color,
-                              defaultWidget: const Text('Update',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ),),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[Flexible(
+                                        child: FlatButton.icon(
+                                          icon: Icon(
+                                            FontAwesomeIcons.moneyBill, color: color,
+                                          ),
+                                          label: Flexible(
+                                            child: Text(widget.price,
+                                              style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                      ),
+                                      ],
+                                    ),
+                              managementofFilterdetails(),
+                              Center(
+                                  child:ProgressButton(
+                                    borderRadius: 20,
+                                    color: color,
+                                    defaultWidget: const Text('Update',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),),
 //  progressWidget: const CircularProgressIndicator(),
-                              progressWidget:SpinKitRotatingCircle   (
-                                color: Colors.red,
-                                size: 50.0,
-                              ) ,
-                              width: 120,
-                              height: 50,
-                              onPressed: () async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>UpdateFilter(tocken: widget.tocken,filterdetail: widget.filterdetail,
-                                    filtername:  widget.filtername,filtercode: widget.filtercode,price:  widget.price,
-                                    userId:widget.userId))
-                                );
+                                    progressWidget:SpinKitRotatingCircle   (
+                                      color: Colors.red,
+                                      size: 50.0,
+                                    ) ,
+                                    width: 120,
+                                    height: 50,
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) =>UpdateFilter(tocken: widget.tocken,filterdetail: widget.filterdetail,
+                                          filtername:  widget.filtername,filtercode: widget.filtercode,price:  widget.price,
+                                          userId:widget.userId))
+                                      );
 // After [onPressed], it will trigger animation running backwards, from end to beginning
-                                return () {
+                                      return () {
 // Optional returns is returning a function that can be called
 // after the animation is stopped at the beginning.
 // A best practice would be to do time-consuming task in [onPressed],
 // and do page navigation in the returned function.
 // So that user won't missed out the reverse animation.
-                                };
-                              },
-                            )
+                                      };
+                                    },
+                                  )
 
 
-                        ),
+                              ),
 
 
-                      ],
-                      ));
+                            ],
+                            )),
+        ),
+      ),
+    );
   }
 }

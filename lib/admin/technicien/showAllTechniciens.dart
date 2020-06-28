@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'CreateTechnicien.dart';
 import 'TechnicienCard.dart';
 
@@ -23,7 +24,7 @@ class _showAllTechnicienState extends State<showAllTechnicien> {
   Future<List<dynamic>> tech ;
 
   Future<List<dynamic>> lookForTechnicien({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/Technicians/?search=$indice";
+    String urlJson = Constants.server_ip+"management/Technicians/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -91,7 +92,7 @@ class _showAllTechnicienState extends State<showAllTechnicien> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

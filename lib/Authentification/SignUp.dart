@@ -11,6 +11,7 @@ import 'package:purifiercompanyapp/Authentification/verify_info.dart';
 
 // to test if it is an email
 import 'package:email_validator/email_validator.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 //test json
 
@@ -45,13 +46,13 @@ class _SignUpState extends State<SignUp> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
 
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -241,7 +242,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<http.Response> submitInfo({String email, String password,String password2,String username,String invitationcode}) async {
     return http.put(
-      'http://anasmansouri.ddns.net:8000/security/registration/',
+      Constants.server_ip+'security/registration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

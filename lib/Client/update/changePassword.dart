@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:purifiercompanyapp/Authentification/Login.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -41,12 +42,12 @@ class _ChangePasswordState extends State<ChangePassword> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -76,7 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               Text("Update  Password",style: TextStyle(
                   color: this.color,
                   fontSize: 29
-              )),Center(child: Alert()),SizedBox(height: height/20,),
+              ),overflow: TextOverflow.ellipsis),Center(child: Alert()),SizedBox(height: height/20,),
               TextFormField(
                 onSaved: (input) {
                   current_password = input;
@@ -142,7 +143,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
-                      ),),
+                      ),overflow: TextOverflow.ellipsis),
 //  progressWidget: const CircularProgressIndicator(),
                     progressWidget:SpinKitRotatingCircle   (
                       color: this.color,
@@ -176,7 +177,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/update_password/',
+      Constants.server_ip+'security/update_password/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'

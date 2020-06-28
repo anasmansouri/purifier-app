@@ -8,6 +8,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
+
 class Prerigstration extends StatefulWidget {
   @override
   _PrerigstrationState createState() => _PrerigstrationState();
@@ -37,13 +39,12 @@ class _PrerigstrationState extends State<Prerigstration> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -325,7 +326,7 @@ class _PrerigstrationState extends State<Prerigstration> {
   Future<http.Response> submitInfo({String username,String invitationcode,String contactName,String mobile,String contactno,String comment,String source,String address1,
   String address2}) async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/prerigstration/',
+      Constants.server_ip+'security/prerigstration/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

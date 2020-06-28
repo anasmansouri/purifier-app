@@ -52,18 +52,18 @@ class _MachineCardState extends State<MachineCard> {
                    Icon(FontAwesomeIcons.idCard,
                       color: Colors.white,),
                     SizedBox(width: 65,),
-                    Text(widget.machineID,style: styleData,)
+                    Text(widget.machineID,softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 ),SizedBox(height: 8,),
                 Row(children: <Widget>[
                   Icon(FontAwesomeIcons.robot,color: Colors.white,)
                   ,SizedBox(width: 65,),
-                  Text(typeOfMachine[widget.producttype] .toString(),style: styleData,)
+                  Text(typeOfMachine[widget.producttype] .toString(),softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                 ],),SizedBox(height: 8,),
                 Row(
                   children: <Widget>[
                   Icon(FontAwesomeIcons.tools,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.nextservicedate?? "",style: styleData,)
+                    Text(widget.nextservicedate?? "",softWrap: true,style: styleData,overflow: TextOverflow.ellipsis)
                   ],
                 )
               ],

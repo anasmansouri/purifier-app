@@ -10,6 +10,7 @@ import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
 import 'package:purifiercompanyapp/admin/filters/CreateFilter.dart';
 import 'package:purifiercompanyapp/admin/filters/FilterCard.dart';
 import 'package:purifiercompanyapp/admin/mainpack/CreateMainPack.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'dart:io';
 import 'package:toast/toast.dart';
 
@@ -38,7 +39,7 @@ class _showAllCasesState extends State<showAllCases> {
   Future<List<dynamic>> cases ;
 
   Future<List<dynamic>> lookForCases({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/management/Cases/?search=$indice";
+    String urlJson = Constants.server_ip+"management/Cases/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -54,7 +55,7 @@ class _showAllCasesState extends State<showAllCases> {
     String tocken
   }) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/management/Technicians/',
+        Constants.server_ip+'management/Technicians/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -66,7 +67,7 @@ class _showAllCasesState extends State<showAllCases> {
     String tocken
   }) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/management/Filters/',
+        'Constants.server_ip+management/Filters/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -79,7 +80,7 @@ class _showAllCasesState extends State<showAllCases> {
     String tocken
   }) async {
     return http.get(
-        'http://anasmansouri.ddns.net:8000/management/Machines/',
+        Constants.server_ip+'management/Machines/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -253,7 +254,7 @@ class _showAllCasesState extends State<showAllCases> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

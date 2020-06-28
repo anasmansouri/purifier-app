@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -33,12 +34,12 @@ class _ChangeEmailState extends State<ChangeEmail> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -68,7 +69,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
               Text("Change email address",style: TextStyle(
                   color: this.color,
                   fontSize: 29
-              )),Center(child: Alert()),SizedBox(height: height/20,),
+              ),overflow: TextOverflow.ellipsis),Center(child: Alert()),SizedBox(height: height/20,),
               TextFormField(
                 onSaved: (input) {
                   password = input;
@@ -132,7 +133,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
-                      ),),
+                      ),overflow: TextOverflow.ellipsis),
 //  progressWidget: const CircularProgressIndicator(),
                     progressWidget:SpinKitRotatingCircle   (
                       color: this.color,
@@ -166,7 +167,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/update_email_address/',
+      Constants.server_ip+'security/update_email_address/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token '+token

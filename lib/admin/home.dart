@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:purifiercompanyapp/admin/clients/showAll.dart';
 import 'package:purifiercompanyapp/admin/machines/showAllMachines.dart';
 import 'package:purifiercompanyapp/admin/technicien/showAllTechniciens.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 
 import 'cases/showAllCases.dart';
 import 'filters/showAllFilters.dart';
@@ -56,12 +57,12 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis,softWrap: true,);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis,softWrap: true,);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -71,7 +72,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
 
   Future<http.Response> submitInfo() async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/logout/',
+      Constants.server_ip+'security/logout/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token '+widget.token
@@ -128,7 +129,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
     return Scaffold(
       backgroundColor:Colors.grey.shade200,
       appBar: AppBar(
-          title: Text("osmosis"),
+          title: Text("osmosis",overflow: TextOverflow.ellipsis),
           actions: <Widget>[
           Padding(
                   padding: EdgeInsets.only(right: 20.0),
@@ -180,17 +181,17 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
               currentIndex: cIndex,
               items: <FancyBottomNavigationItem>[
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.home), title: Text('Home')),
+                    icon: Icon(Icons.home), title: Text('Home',softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.inbox), title: Text("Main pack")),
+                    icon: Icon(Icons.inbox), title: Text("Main pack",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(FontAwesomeIcons.robot), title: Text("machines")),
+                    icon: Icon(FontAwesomeIcons.robot), title: Text("machines",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.person), title:  Text("techniciew")),
+                    icon: Icon(Icons.person), title:  Text("techniciew",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(FontAwesomeIcons.screwdriver), title: Text("cases")),
+                    icon: Icon(FontAwesomeIcons.screwdriver), title: Text("cases",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(FontAwesomeIcons.filter), title: Text("filter")),
+                    icon: Icon(FontAwesomeIcons.filter), title: Text("filter",softWrap: true,overflow: TextOverflow.ellipsis)),
               ],
               onItemSelected: (int value) {
                 indexcontroller.add(value);

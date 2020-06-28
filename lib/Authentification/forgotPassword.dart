@@ -8,6 +8,7 @@ import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 
 import 'Login.dart';
@@ -34,12 +35,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -65,7 +66,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Text("Enter your informations ",style: TextStyle(
                   color: this.color,
                   fontSize: 30
-              )),SizedBox(height: height/10,),
+              ),overflow: TextOverflow.ellipsis),SizedBox(height: height/10,),
               Center(child: Alert()),
               SizedBox(height: 20,),
               TextFormField(
@@ -144,7 +145,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
   Future<http.Response> submitInfo(String username, String invitationcode) async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/forgotpassword/',
+      Constants.server_ip+'security/forgotpassword/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

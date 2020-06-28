@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:purifiercompanyapp/admin/clients/prerigstration.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'ClientCard.dart';
 
 
@@ -21,7 +22,7 @@ class _showAllClientsState extends State<showAllClients> {
   Future<List<dynamic>> clients ;
 
   Future<List<dynamic>> lookForClient({String indice}) async {
-    String urlJson = "http://anasmansouri.ddns.net:8000/security/accounts/?search=$indice";
+    String urlJson = Constants.server_ip+"security/accounts/?search=$indice";
     var res = await http.get(Uri.encodeFull(urlJson),headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization':'token '+widget.tocken
@@ -90,7 +91,7 @@ class _showAllClientsState extends State<showAllClients> {
                     );
                   }else{
                     return SpinKitCircle(
-                      color: Colors.white,
+                      color: Colors.blue,
                       size: 50.0,
                     );
                   }

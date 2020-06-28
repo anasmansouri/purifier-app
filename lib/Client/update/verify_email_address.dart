@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:purifiercompanyapp/global_constants/Constants.dart';
 import 'package:toast/toast.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -32,12 +33,12 @@ class _Verify_emailState extends State<Verify_email> {
       return Text("no internet connexion ",style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else if(wrongInfo){
       return Text(wrongInfoMsg,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),);
+      ),overflow: TextOverflow.ellipsis);
     }else{
       return SizedBox(height: 0,width: 0,);
     }
@@ -65,7 +66,7 @@ class _Verify_emailState extends State<Verify_email> {
             Text("Email verification",style: TextStyle(
                 color: this.color,
                 fontSize: 29
-            )),Center(child: Alert()),SizedBox(height: height/20,),
+            ),overflow: TextOverflow.ellipsis),Center(child: Alert()),SizedBox(height: height/20,),
             TextFormField(
               onSaved: (input) {
                 code = input;
@@ -125,7 +126,7 @@ class _Verify_emailState extends State<Verify_email> {
 
   Future<http.Response> submitInfo({String code}) async {
     return http.post(
-      'http://anasmansouri.ddns.net:8000/security/verify_email/',
+      Constants.server_ip+'security/verify_email/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':'token $token'
