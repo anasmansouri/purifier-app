@@ -187,7 +187,7 @@ class _FancyBottomBarPageAdminState extends State<FancyBottomBarPageAdmin> {
                 FancyBottomNavigationItem(
                     icon: Icon(FontAwesomeIcons.robot), title: Text("machines",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
-                    icon: Icon(Icons.person), title:  Text("techniciew",softWrap: true,overflow: TextOverflow.ellipsis)),
+                    icon: Icon(Icons.person), title:  Text("technicien",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(
                     icon: Icon(FontAwesomeIcons.screwdriver), title: Text("cases",softWrap: true,overflow: TextOverflow.ellipsis)),
                 FancyBottomNavigationItem(

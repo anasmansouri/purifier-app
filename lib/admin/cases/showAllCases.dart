@@ -67,7 +67,7 @@ class _showAllCasesState extends State<showAllCases> {
     String tocken
   }) async {
     return http.get(
-        'Constants.server_ip+management/Filters/',
+        Constants.server_ip+'management/Filters/',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization':'Token $tocken'
@@ -237,7 +237,7 @@ class _showAllCasesState extends State<showAllCases> {
                   if(snapshot.connectionState==ConnectionState.done){
                     return   ListView.builder(
                       shrinkWrap: true,
-                      itemCount:snapshot.data.length,
+                      itemCount:snapshot.data?.length ?? 0,
                       itemBuilder: (BuildContext ctxt, int index) =>
                           CaseCard(tocken: widget.tocken,scheduledate:snapshot.data[index]["scheduledate"],
                               casetype:  snapshot.data[index]["casetype"].toString(),

@@ -76,47 +76,43 @@ class _CaseDetailsState extends State<CaseDetails> {
                                     SizedBox(height: 50),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[Flexible(
-                                        child: FlatButton.icon(
-                                          icon: Icon(FontAwesomeIcons.idCard, color: color,
-                                          ),
-                                          label: Flexible(
-                                            child: Text(widget.casetype,
-                                              style: style,softWrap: true,overflow: TextOverflow.ellipsis),
-                                          ),
+                                      children: <Widget>[FlatButton.icon(
+                                        icon: Icon(FontAwesomeIcons.idCard, color: color,
+                                        ),
+                                        label: Flexible(
+                                          child: Text(widget.casetype,
+                                            style: style,softWrap: true,overflow: TextOverflow.ellipsis),
                                         ),
                                       ),
                                       ],
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[Flexible(child : FlatButton.icon(
+                                      children: <Widget>[FlatButton.icon(
                                         icon: Icon(FontAwesomeIcons.calendarAlt, color: color,
                                         ),
                                         label: Flexible(
                                           child: Text(widget.scheduledate,
                                             style: style,softWrap: true,overflow: TextOverflow.ellipsis),
                                         ),
-                                      )),
+                                      ),
                                       ],
                                     ),
                                     Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[Flexible(
-                                            child: FlatButton.icon(
-                                                                icon: Icon(FontAwesomeIcons.userCog, color: color,
-                                                                ),
-                                                                label: Flexible(
-                                                                  child: Text(widget.handledby,
-                                                                  style: style,softWrap: true,overflow: TextOverflow.ellipsis),
-                                                                ),
-                                                                ),
-                                          ),
+                                          children: <Widget>[FlatButton.icon(
+                                                              icon: Icon(FontAwesomeIcons.userCog, color: color,
+                                                              ),
+                                                              label: Flexible(
+                                                                child: Text(widget.handledby,
+                                                                style: style,softWrap: true,overflow: TextOverflow.ellipsis),
+                                                              ),
+                                                              ),
                                           ],
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[Flexible(child: FlatButton.icon(
+                                      children: <Widget>[FlatButton.icon(
                                         icon: Icon(
                                           FontAwesomeIcons.mapMarkerAlt, color: color,
                                         ),
@@ -124,63 +120,59 @@ class _CaseDetailsState extends State<CaseDetails> {
                                           child: Text(widget.machines[0]["installaddress1"],
                                             style: style,softWrap: true,overflow: TextOverflow.ellipsis),
                                         ),
-                                      )),
+                                      ),
                                       ],
                                     ),
                                     SizedBox(height: 11,),
-                              Expanded(
-                                                child: Column(
-                                                  children: <Widget>[
-                                                    ListView.builder(
-                                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                                            shrinkWrap: true,
-                                                            itemCount:widget.machines?.length??0,
-                                                            itemBuilder: (BuildContext ctxt, int index) =>  Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                              children: <Widget>[
-                                                                              Icon(FontAwesomeIcons.robot,color: Colors.blue,),
-                                                                              SizedBox(width: 20,),
-                                                                              Text(widget.machines[index]["machineid"],softWrap: true,style: style,overflow: TextOverflow.ellipsis),
-                                                                              SizedBox(width: 20,),
-                                                                              Text(typeOfMachine[widget.machines[index]["producttype"]] ,softWrap: true,style: style,overflow: TextOverflow.ellipsis),
-                                                                              SizedBox(height: 39,),
-                                                                              ],
-                                                                              ),
-                                                    ),
-                                                    ListView.builder(
-                                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                                      shrinkWrap: true,
-                                                      itemCount:widget.filters?.length??0,
-                                                      itemBuilder: (BuildContext ctxt, int index) =>  Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          Icon(FontAwesomeIcons.filter,color: Colors.blue,),
+                            Column(
+                              children: <Widget>[
+                                ListView.builder(
+                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                        shrinkWrap: true,
+                                        itemCount:widget.machines?.length??0,
+                                        itemBuilder: (BuildContext ctxt, int index) =>  Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: <Widget>[
+                                                          Icon(FontAwesomeIcons.robot,color: Colors.blue,),
                                                           SizedBox(width: 20,),
-                                                          Text(widget.filters[index]["filtercode"]??"",softWrap: true,style: style,overflow: TextOverflow.ellipsis),
+                                                          Text(widget.machines[index]["machineid"],softWrap: true,style: style,overflow: TextOverflow.ellipsis),
                                                           SizedBox(width: 20,),
-                                                          Text(widget.filters[index]["filtername"]??"",softWrap: true,style: style,overflow: TextOverflow.ellipsis),
+                                                          Text(typeOfMachine[widget.machines[index]["producttype"]] ,softWrap: true,style: style,overflow: TextOverflow.ellipsis),
                                                           SizedBox(height: 39,),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      children: <Widget>[Flexible(
-                                                        child: FlatButton.icon(
-                                                          icon: Icon(
-                                                            FontAwesomeIcons.checkDouble, color: color,
+                                                          ],
                                                           ),
-                                                          label: Flexible(
-                                                            child: Text(widget.iscompleted.toString(),
-                                                              style: style,softWrap: true,overflow: TextOverflow.ellipsis,),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                ),
+                                ListView.builder(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  shrinkWrap: true,
+                                  itemCount:widget.filters?.length??0,
+                                  itemBuilder: (BuildContext ctxt, int index) =>  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(FontAwesomeIcons.filter,color: Colors.blue,),
+                                      SizedBox(width: 20,),
+                                      Text(widget.filters[index]["filtercode"]??"",softWrap: true,style: style,overflow: TextOverflow.ellipsis),
+                                      SizedBox(width: 20,),
+                                      Text(widget.filters[index]["filtername"]??"",softWrap: true,style: style,overflow: TextOverflow.ellipsis),
+                                      SizedBox(height: 39,),
+                                    ],
                                   ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[FlatButton.icon(
+                                    icon: Icon(
+                                      FontAwesomeIcons.checkDouble, color: color,
+                                    ),
+                                    label: Flexible(
+                                      child: Text(widget.iscompleted.toString(),
+                                        style: style,softWrap: true,overflow: TextOverflow.ellipsis,),
+                                    ),
+                                  ),
+                                  ],
+                                ),
+                              ],
+                            ),
                               // managementOfFilters(),
                               Center(
                                   child:ProgressButton(

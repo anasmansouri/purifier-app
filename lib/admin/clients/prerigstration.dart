@@ -39,12 +39,12 @@ class _PrerigstrationState extends State<Prerigstration> {
       return Text("no internet connexion ",textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 15
-      ),overflow: TextOverflow.ellipsis);
+      ));
     }else if(wrongInfo){
       return Text(wrongInfoMsg, textAlign: TextAlign.center,style: TextStyle(
           color: Colors.red,
           fontSize: 20,
-      ),overflow: TextOverflow.ellipsis);
+      ));
     }else{
       return SizedBox(height: 0,width: 0,);
     }

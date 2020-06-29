@@ -86,7 +86,7 @@ class _ClientInfoDetailsState extends State<ClientInfoDetails> {
 
     if(this.no_data_problem && this.good_internet_connexion){
       return Scaffold(backgroundColor: Colors.white,body: SingleChildScrollView(
-          child: SafeArea(child: showInfo(email: this.email,mobile: this.contactName,username: this.contactName,height:height,width: width))));
+          child: SafeArea(child: showInfo(email: this.email,mobile: this.mobileNumber,username: this.contactName,height:height,width: width))));
     }else{
       return SpinKitCircle(
         color: Colors.blue,

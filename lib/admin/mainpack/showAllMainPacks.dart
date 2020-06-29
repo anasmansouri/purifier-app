@@ -81,7 +81,7 @@ class _showAllMainPacksState extends State<showAllMainPacks> {
                     // print(snapshot.data.toString());
                     return   ListView.builder(
                       shrinkWrap: true,
-                      itemCount:snapshot.data.length,
+                      itemCount:snapshot.data?.length ?? 0,
                       itemBuilder: (BuildContext ctxt, int index) =>
                           MainPackCard(tocken: widget.tocken,packagecode: snapshot.data[index]["packagecode"]
                               ,exfiltermonth: snapshot.data[index]["exfiltermonth"].toString(),

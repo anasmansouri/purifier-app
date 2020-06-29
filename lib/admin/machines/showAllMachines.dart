@@ -195,7 +195,7 @@ class _showAllMachinesState extends State<showAllMachines> {
                     // print(snapshot.data.toString());
                     return   ListView.builder(
                       shrinkWrap: true,
-                      itemCount:snapshot.data.length,
+                      itemCount:snapshot.data?.length ?? 0,
                       itemBuilder: (BuildContext ctxt, int index) =>
                           MachineCard(tocken: widget.tocken,username:   snapshot.data[index]["user"],
                               mac: snapshot.data[index]["mac"].toString(),

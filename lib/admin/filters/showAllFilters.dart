@@ -83,7 +83,7 @@ class _showAllFiltersState extends State<showAllFilters> {
                     // print(snapshot.data.toString());
                     return   ListView.builder(
                       shrinkWrap: true,
-                      itemCount:snapshot.data.length,
+                      itemCount:snapshot.data?.length ?? 0,
                       itemBuilder: (BuildContext ctxt, int index) =>
                           FilterCard(tocken: widget.tocken,filtercode:  snapshot.data[index]["filtercode"],
                               filterdetail:  snapshot.data[index]["filterdetail"].toString(),

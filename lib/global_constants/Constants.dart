@@ -1,4 +1,4 @@
 class Constants {
-  static String server_ip="https://92542fdd29d2.ngrok.io/";
+  static String server_ip="https://13b9cca1deca.ngrok.io/";
 
 }

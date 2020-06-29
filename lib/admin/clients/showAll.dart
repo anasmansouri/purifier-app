@@ -79,7 +79,7 @@ class _showAllClientsState extends State<showAllClients> {
                     // print(snapshot.data.toString());
                     return   ListView.builder(
                       shrinkWrap: true,
-                      itemCount:snapshot.data.length,
+                      itemCount:snapshot.data?.length ?? 0,
                       itemBuilder: (BuildContext ctxt, int index) =>
                           ClientCard(tocken: widget.tocken,mobile:  snapshot.data[index]["mobile"]
                               ,joindate:  snapshot.data[index]["joindate"],

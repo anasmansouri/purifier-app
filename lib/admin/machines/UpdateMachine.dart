@@ -81,7 +81,7 @@ class _UpdateMachineState extends State<UpdateMachine> {
                   SizedBox(height: 30,),
                   Center(
                    child :  Icon(
-                        FontAwesomeIcons.filter,
+                        FontAwesomeIcons.robot,
                         color: this.color,
                         size: 130.0,
                       ),
