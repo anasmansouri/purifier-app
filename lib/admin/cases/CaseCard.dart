@@ -78,7 +78,7 @@ class _CaseCardState extends State<CaseCard> {
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.mapMarkerAlt,color: Colors.white,),SizedBox(width: 65,),
-                    Text(widget.machines[0]["installaddress1"],style: styleData,overflow: TextOverflow.ellipsis)
+                    Flexible(child: Text(widget.machines[0]["installaddress1"],style: styleData,overflow: TextOverflow.ellipsis))
                   ],
                 ),
                 SizedBox(height: 8,),
