@@ -1,4 +1,4 @@
 class Constants {
-  static String server_ip="https://osmosis-crm-ag253bewka-uc.a.run.app/";
+  static String server_ip="http://34.105.255.214/";
 
 }
